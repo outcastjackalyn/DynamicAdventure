@@ -15,11 +15,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-173">
-              <caret line="32" column="57" lean-forward="true" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
+            <state relative-caret-position="-255">
+              <caret line="52" column="85" lean-forward="true" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="85" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameData.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,8 +42,8 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="128" column="26" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
+            <state relative-caret-position="85">
+              <caret line="134" column="7" lean-forward="true" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -39,8 +51,8 @@
       <file leaf-file-name="DynamicTextGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/DynamicTextGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="53" column="24" lean-forward="true" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+            <state relative-caret-position="51">
+              <caret line="41" column="35" lean-forward="true" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9608#9609#0" expanded="true" />
@@ -91,13 +103,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/Alive.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/player/Player.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/player/PlayerData.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/Items/Item.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furniture.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Item.java" />
@@ -109,10 +123,11 @@
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/Main.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/ItemFactory.java" />
         <option value="$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/Item.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -123,159 +138,38 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
+              <item name="DynamicAdventure" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
+              <item name="DynamicAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="outcastjackalyn" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
+              <item name="DynamicAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="outcastjackalyn" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
+              <item name="DynamicAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="outcastjackalyn" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="input" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="outcastjackalyn" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DynamicPrototype" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="outcastjackalyn" type="462c0819:PsiDirectoryNode" />
-              <item name="scenes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="events" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="events" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DynamicAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TextAdventurePackage" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,11 +177,11 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/git-bash.exe" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -374,13 +268,13 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49926794" weight="0.3288889" />
+      <window_info active="true" anchor="bottom" id="Messages" order="7" sideWeight="0.49926794" visible="true" weight="0.3288889" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.50073206" weight="0.3288889" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -410,13 +304,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/parser/ITextDictionary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -733,23 +620,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="128" column="26" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/ItemFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/ItemFactory.java" />
     <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/Item.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -757,10 +628,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="134" column="7" lean-forward="true" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/DynamicTextGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="53" column="24" lean-forward="true" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+        <state relative-caret-position="51">
+          <caret line="41" column="35" lean-forward="true" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9608#9609#0" expanded="true" />
@@ -771,8 +649,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-173">
-          <caret line="32" column="57" lean-forward="true" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
+        <state relative-caret-position="-255">
+          <caret line="52" column="85" lean-forward="true" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
