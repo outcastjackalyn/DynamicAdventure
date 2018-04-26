@@ -49,6 +49,8 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
         this.inString = inString;
     }
 
+    public GameData gameData = new GameData();
+
     @Override
     protected String getInput() {
         String str = "";
@@ -58,6 +60,27 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
             inString = "";
         }
         return str;
+    }
+
+
+
+
+
+    /**
+     *
+     * @param gameData
+     * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
+     */
+    public DynamicTextGame(GameData gameData) throws IllegalArgumentException {
+        //checkArg(current, "current");
+        //checkArg(gameData, "player");
+        this.gameData = gameData;
+        this.player = gameData.getPlayer();
+
+        //this.player = player;
+        worldUtil = new WorldUtil<>(gameData.getStart(), player);
+        //  parser = new BasicTextParser<>();
+        //inputScanner = new Scanner(System.in);
     }
 
     /*
@@ -75,20 +98,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
             (a, d, damage) -> output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n")
     );
 
-    /**
-     *
-     * @param current the current location. Must be non-null
-     * @param player
-     * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
-     */
-    public DynamicTextGame(ILocation current, Player player) throws IllegalArgumentException {
-        checkArg(current, "current");
-        checkArg(player, "player");
-        this.player = player;
-        worldUtil = new WorldUtil<>(current, player);
-      //  parser = new BasicTextParser<>();
-        inputScanner = new Scanner(System.in);
-    }
+
 
     public ILocation getCurrent() {
         return worldUtil.getCurrent();
@@ -249,12 +259,16 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                 } else {
                     output.println(player.inventoryOverview());
                 }
+                break;
             case MONEY:
                 output.println(player.getMoney());
+                break;
             case HEALTH:
                 output.println(player.getHealth());
+                break;
             case MAX_HEALTH:
                 output.println(player.getMaxHealth());
+                break;
             default:
                 output.println("Nothing by that name was found");
         }

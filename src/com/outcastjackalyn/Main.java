@@ -1,6 +1,7 @@
 package com.outcastjackalyn;
 
 import com.outcastjackalyn.game.DynamicTextGame;
+import com.outcastjackalyn.game.GameData;
 import jjcard.text.game.impl.*;
 import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.impl.BasicTextParser;
@@ -26,11 +27,12 @@ public class Main {
   //  public DynamicTextGame dTGame = new DynamicTextGame(start, player);
 
     public static DynamicTextGame game;
-    public static Player player;
+    public static GameData gameData;
+   /* public static Player player;
     public static Location local;
     public static Location hallway;
     public static Mob mob;
-    public static ITextParser<BasicTextTokenType> parser;
+    public static ITextParser<BasicTextTokenType> parser;*/
 
     public static JFrame frame = new JFrame("Dynamic Text Adventure");
 
@@ -79,20 +81,14 @@ public class Main {
         frame.setSize(width, height);
         frame.setVisible(true);
 
-        player = new Player.Builder().name("player1").maxHealth(50).health(50).defense(8).attack(5).build();
-        local = new Location("entry room", "A barren room.");
-        game = new DynamicTextGame(local, player);
-        game.setTextParser(getParser());
 
-        Item item = new Item.Builder().name("apple").roomDescription("There is an apple on the floor.").build();
-        local.addItem(item);
-        hallway = new Location("hallway", "A long hallway with one torch.");
-        local.addExit("NORTH", hallway);
-        hallway.addExit(Exit.SOUTH.getWithLocation(local));
+        gameData = new GameData();
 
-        mob = new Mob.Builder().name("Goblin").health(10).defense(1).attack(4).build();
-        mob.setViewDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
-        hallway.addMob(mob);
+
+
+        game = new DynamicTextGame(gameData);
+        game.setTextParser(game.gameData.getParser());
+
 
         game.setOutput(new PrintStream(new OutputStream() {
             @Override
@@ -180,16 +176,4 @@ public class Main {
 
 
 
-    private static ITextParser<BasicTextTokenType> getParser(){ //not written by me
-        if (parser == null){
-            parser = new BasicTextParser<>();
-            TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(
-                    BasicTextTokenType.values()).putAll(BasicTextTokenType.DIRECTION, Exit.DEFAULT_VALUES)
-                    .putAll(BasicTextTokenType.ITEM, "coin", "item", "apple").putAll(BasicTextTokenType.WEAPON, "shank")
-                    .putAll(BasicTextTokenType.ENEMY, "goblin").putAll(BasicTextTokenType.ARMOR, "wool");
-            parser.setTextDictionary(dictionary);
-            //TODO make this less tedious..
-        }
-        return parser;
-    }
 }
