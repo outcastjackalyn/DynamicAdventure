@@ -7,9 +7,12 @@ import java.io.PrintStream;
 import java.io.*;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
+import com.outcastjackalyn.utils.DynamicWorldUtil;
+import com.outcastjackalyn.utils.DynamicWorldUtil.ReturnStatus;
 import jjcard.text.game.impl.*;
 import jjcard.text.game.IItem;
-import jjcard.text.game.ILocation;
+import com.outcastjackalyn.scenes.IDynLocation;
 import jjcard.text.game.battle.IBattleSystem;
 import jjcard.text.game.battle.impl.BasicBattleSystem;
 import jjcard.text.game.parser.ITextParser;
@@ -18,8 +21,8 @@ import jjcard.text.game.parser.TextToken;
 import jjcard.text.game.parser.impl.BasicTextParser;
 import jjcard.text.game.parser.impl.BasicTextTokenType;
 import jjcard.text.game.util.NotFoundException;
-import jjcard.text.game.util.WorldUtil;
-import jjcard.text.game.util.WorldUtil.ReturnStatus;
+//import jjcard.text.game.util.WorldUtil;
+//import jjcard.text.game.util.WorldUtil.ReturnStatus;
 
 public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
@@ -78,7 +81,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
         this.player = gameData.getPlayer();
 
         //this.player = player;
-        worldUtil = new WorldUtil<>(gameData.getStart(), player);
+        worldUtil = new DynamicWorldUtil<>(gameData.getStart(), player);
         //  parser = new BasicTextParser<>();
         //inputScanner = new Scanner(System.in);
     }
@@ -89,7 +92,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
 
 
-    private WorldUtil<Player> worldUtil;
+    private DynamicWorldUtil<Player> worldUtil;
     private PrintStream output = System.out;
     private Scanner inputScanner;
     //TODO how to handle when mob is dead, can't remove it, since still has items...
@@ -100,7 +103,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
 
 
-    public ILocation getCurrent() {
+    public IDynLocation getCurrent() {
         return worldUtil.getCurrent();
     }
     public void setTextParser(ITextParser<BasicTextTokenType> parser) {
@@ -142,7 +145,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                         getItemFromRoom(token, object);
                         break;
                     case LOOT:
-                        lootAllMob(token, object);
+                        lootAll(token, object);
                         break;
                     case DROP:
                         dropItem(token, object);
@@ -292,14 +295,25 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
     }
 
-    protected void lootAllMob(String token, TextToken<BasicTextTokenType> object) {
-        ReturnStatus re = worldUtil.lootAllMob(token);
-        if (ReturnStatus.SUCCESS.equals(re)){
-            output.println(token + "'s items added");
-        } else if (ReturnStatus.FAILURE.equals(re)){
-            output.println(token + " is still alive!");
+    protected void lootAll(String token, TextToken<BasicTextTokenType> object) {
+        if(object.getType() == BasicTextTokenType.ENEMY) {
+            ReturnStatus re = worldUtil.lootAllMob(token);
+            if (ReturnStatus.SUCCESS.equals(re)) {
+                output.println(token + "'s items added");
+            } else if (ReturnStatus.FAILURE.equals(re)) {
+                output.println(token + " is still alive!");
+            } else {
+                output.println("Mob not found");
+            }
         } else {
-            output.println("Mob not found");
+            ReturnStatus re = worldUtil.lootAllFurniture(token);
+            if (ReturnStatus.SUCCESS.equals(re)) {
+                output.println(token + "'s items added");
+            } else if (ReturnStatus.FAILURE.equals(re)) {
+                output.println(token + " is empty.");
+            } else {
+                output.println("Object not found");
+            }
         }
     }
 

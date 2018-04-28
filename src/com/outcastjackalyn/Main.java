@@ -131,7 +131,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(entry.getText().length() > 0) {
                     game.setInString(entry.getText());
-                    game.getOuput().println(">" + entry.getText());
+                    game.getOuput().println("<br>>" + entry.getText());
                     entry.setText("");
                 }
             }
