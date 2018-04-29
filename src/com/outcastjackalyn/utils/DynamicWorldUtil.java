@@ -4,6 +4,7 @@ import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
 import com.outcastjackalyn.objects.IFurniture;
 import com.outcastjackalyn.scenes.IDynLocation;
+import com.outcastjackalyn.scenes.LockState;
 import jjcard.text.game.IArmour;
 import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
@@ -22,6 +23,56 @@ import jjcard.text.game.util.NotFoundException;
 public class DynamicWorldUtil<P extends IMob>{
     private IDynLocation current;
     private P player;
+
+    public boolean lockExit(String token) {
+        if(roomContainsExit(token)) {
+            if(current.getExit(token).getLockState() == LockState.UNLOCKED) {
+                current.getExit(token).setLockState(LockState.LOCKED);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean unlockExit(String token) {
+        if(roomContainsExit(token)) {
+            if(current.getExit(token).getLockState() == LockState.LOCKED) {
+                current.getExit(token).setLockState(LockState.UNLOCKED);
+                return true;
+            }
+            else if(current.getExit(token).getLockState() == LockState.BLOCKED) {
+                current.getExit(token).setLockState(LockState.ALWAYS_OPEN);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean lockFurniture(String token) {
+        if(roomContainsFurniture(token)) {
+            if(current.getFurniture(token).getLockState() == LockState.UNLOCKED) {
+                current.getFurniture(token).setLockState(LockState.LOCKED);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean unlockFurniture(String token) {
+        if(roomContainsFurniture(token)) {
+            if(current.getFurniture(token).getLockState() == LockState.LOCKED) {
+                current.getFurniture(token).setLockState(LockState.UNLOCKED);
+                return true;
+            }
+            else if(current.getFurniture(token).getLockState() == LockState.BLOCKED) {
+                current.getFurniture(token).setLockState(LockState.ALWAYS_OPEN);
+                return true;
+            }
+        }
+        return false;
+    }
+
 //	private IBattleSystem battleSystem = new BasicBattleSystem();
     /**
      * Generic enum response used in place of a boolean.
@@ -107,7 +158,7 @@ public class DynamicWorldUtil<P extends IMob>{
      * @return if current contains exit and current changed
      */
     public boolean goDirection(String key) {
-        if (current.containsExit(key)) {
+        if (current.containsOpenExit(key)) {
             current = current.getExitLocation(key);
             return true;
         }
@@ -130,6 +181,14 @@ public class DynamicWorldUtil<P extends IMob>{
         return current.containsItem(key);
     }
     /**
+     * Checks to see if the current room contains furniture with given key
+     * @param key
+     * @return
+     */
+    public boolean roomContainsFurniture(String key) {
+        return current.containsFurniture(key);
+    }
+    /**
      * Retrieves Item from room with <code>key</code>. If found, adds Item to player.
      * @param key
      * @return true if item found in current room, false otherwise
@@ -142,6 +201,21 @@ public class DynamicWorldUtil<P extends IMob>{
         }
         return false;
     }
+
+    /**
+     * Retrieves Item from room with <code>key</code>. If found, adds Item to player.
+     * @param key
+     * @return true if item found in current room, false otherwise
+     */
+    public boolean playerGetItemFromFurniture(IFurniture furniture, String key) {
+        IItem re = furniture.getItem(key);
+        if (re != null && re.canGet()) {
+            player.addItem(re);
+            return true;
+        }
+        return false;
+    }
+
 
     public String showCurrentRoom() {
         return current.showRoom();
@@ -354,6 +428,14 @@ public class DynamicWorldUtil<P extends IMob>{
                 return ReturnStatus.FAILURE;
             }
         } else {
+            for (IFurniture furniture : current.getFurnishings().values()) {
+                if(playerGetItemFromFurniture(furniture, key)) {
+                    furniture.removeItem(key);
+                    return ReturnStatus.SUCCESS;
+                } else {
+                    return ReturnStatus.FAILURE;
+                }
+            }
             return ReturnStatus.NOT_FOUND;
         }
     }

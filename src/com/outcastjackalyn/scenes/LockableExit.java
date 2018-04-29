@@ -57,6 +57,42 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
             {NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
 
 
+    public LockableExit oppositeDirection(LockableExit entrance) {
+        LockableExit exit = NORTH;
+        switch (entrance.getName()) {
+            case "NORTHWEST":
+                exit = SOUTHEAST;
+                break;
+            case "NORTHEAST" :
+                exit = SOUTHWEST;
+                break;
+            case "NORTH":
+                exit = SOUTH;
+                break;
+            case "SOUTHEAST":
+                exit = NORTHWEST;
+                break;
+            case "SOUTHWEST":
+                exit = NORTHEAST;
+                break;
+            case "SOUTH":
+                exit = NORTH;
+                break;
+            case "EAST":
+                exit = WEST;
+                break;
+            case "WEST":
+                exit = EAST;
+                break;
+            case "UP":
+                exit = DOWN;
+                break;
+            case "DOWN":
+                exit = UP;
+                break;
+        }
+        return exit;
+    }
 
     @JsonProperty("loc")
     private final IDynLocation location;
@@ -129,6 +165,8 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
         this.hidden = builder.hidden;
         this.lockState = lockState;
     }
+
+
     /**
      * Gets the Location
      */
@@ -168,6 +206,14 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
         this.lockState = lockState;
     }
 
+
+    public boolean isOpen(){
+        boolean bool =  false;
+        if(this.lockState == LockState.ALWAYS_OPEN || this.lockState == LockState.UNLOCKED) {
+            bool = true;
+        }
+        return bool;
+    }
 
     public boolean equals(Object object){
         if (object == this){

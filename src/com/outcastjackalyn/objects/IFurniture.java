@@ -1,5 +1,6 @@
 package com.outcastjackalyn.objects;
 
+import com.outcastjackalyn.scenes.LockState;
 import jjcard.text.game.ConcealableGameElement;
 import jjcard.text.game.IItem;
 import jjcard.text.game.impl.ItemUse;
@@ -38,7 +39,11 @@ public interface IFurniture extends ConcealableGameElement {
      */
     public Map<String, IItem> removeInventory();
 
+    public IItem removeItem(String key);
+
     public boolean isEmpty();
+
+    public boolean isOpen();
 
     public boolean isMovable();
 
@@ -52,6 +57,10 @@ public interface IFurniture extends ConcealableGameElement {
      */
     public boolean canGet();
 
+    public void setLockState(LockState lockState);
+
+    public LockState getLockState();
+
     public void setHidden(boolean hidden);
 
     public void setMovable(boolean movable);
@@ -59,8 +68,6 @@ public interface IFurniture extends ConcealableGameElement {
     public int getCost();
 
     public int getLevel();
-
-
 
 
 }

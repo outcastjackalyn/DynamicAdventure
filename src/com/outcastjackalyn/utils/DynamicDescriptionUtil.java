@@ -150,6 +150,9 @@ public final class DynamicDescriptionUtil {
         final String _exitStart = exitStart == null? "": exitStart;
         final StringBuilder re = new StringBuilder(location.getDescription());
         String curDescrip;
+        if (!(curDescrip = location.getFurnishingsDescriptions()).isEmpty()){
+            re.append(SPACE).append(curDescrip);
+        }
         if (!(curDescrip = location.getInventoryDescriptions()).isEmpty()){
             re.append(SPACE).append(curDescrip);
         }

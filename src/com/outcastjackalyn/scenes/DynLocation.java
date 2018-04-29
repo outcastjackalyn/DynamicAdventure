@@ -4,12 +4,14 @@ package com.outcastjackalyn.scenes;
 import static jjcard.text.game.util.MapUtil.newHashMap;
 import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
+import java.util.Locale;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.outcastjackalyn.objects.IFurniture;
+import com.outcastjackalyn.utils.DynamicDescriptionUtil;
 import jjcard.text.game.IItem;
 import com.outcastjackalyn.scenes.IDynLocation;
 import com.outcastjackalyn.scenes.IDynExit;
@@ -178,8 +180,24 @@ public class DynLocation implements IDynLocation {
     public IFurniture getFurniture(String key){
         return MAP_UTIL.getItemFromMap(furnishings, key);
     }
+
     public boolean containsExit(String dir){
         return MAP_UTIL.containsKey(exits, dir);
+    }
+
+    public boolean containsOpenExit(String dir) {
+        boolean bool = false;
+        dir = dir.toUpperCase(Locale.getDefault());
+        if(exits.containsKey(dir)){ // check if it contains the exit
+            for(IDynExit exit : exits.values()) { // select the exit
+                if(exit.getName().equals(dir)) {
+                    if(exit.isOpen()) { // check if the exit is open
+                        bool = true;
+                    }
+                }
+            }
+        }
+        return bool;
     }
     @JsonProperty("descrip")
     public void setDescription(String descrip){
@@ -193,14 +211,22 @@ public class DynLocation implements IDynLocation {
         return compare;
     }
     public String getExitsDescriptions(){
-        return DescriptionUtil.getConcealableNames(exits, true);
+        return DynamicDescriptionUtil.getConcealableNames(exits, true);
     }
-    public String getInventoryDescriptions(){
-        return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
+    public String getInventoryDescriptions() {
+        return DynamicDescriptionUtil.getConceableRoomDescriptions(inventory, true);
     }
-    public String getFurnishingsDescriptions(){ return DescriptionUtil.getConceableRoomDescriptions(furnishings, true); }
+    public String getFurnishingsDescriptions() {
+        String str = DynamicDescriptionUtil.getConceableRoomDescriptions(furnishings, true);
+        for(IFurniture furniture : furnishings.values()) {
+            if(furniture.isOpen()) {
+                str = str + " " + DynamicDescriptionUtil.getConceableRoomDescriptions(furniture.getInventory(), true);
+            }
+        }
+        return str;
+    }
     public String getMobDescriptions(){
-        return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
+        return DynamicDescriptionUtil.getConceableRoomDescriptions(roomMob, true);
     }
     /**
      * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}

@@ -11,4 +11,10 @@ public interface IDynExit extends ConcealableGameElement {
     public IDynLocation getLocation();
 
     public void setHidden(boolean hidden);
+
+    public void setLockState(LockState lockState);
+
+    public boolean isOpen();
+
+    public LockState getLockState();
 }

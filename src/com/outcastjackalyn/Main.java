@@ -18,21 +18,8 @@ import java.io.*;
 public class Main {
 
 
-
-
- //   public Location start = new Location("Start", "This is where it begins") ;
-   // public Player.Builder builder = new Player.Builder();
-  //  public Player player = new Player("player");
-
-  //  public DynamicTextGame dTGame = new DynamicTextGame(start, player);
-
     public static DynamicTextGame game;
     public static GameData gameData;
-   /* public static Player player;
-    public static Location local;
-    public static Location hallway;
-    public static Mob mob;
-    public static ITextParser<BasicTextTokenType> parser;*/
 
     public static JFrame frame = new JFrame("Dynamic Text Adventure");
 
@@ -131,7 +118,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(entry.getText().length() > 0) {
                     game.setInString(entry.getText());
-                    game.getOuput().println("<br>>" + entry.getText());
+                    game.getOuput().println(">>" + entry.getText());
                     entry.setText("");
                 }
             }

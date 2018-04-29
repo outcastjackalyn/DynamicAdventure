@@ -74,6 +74,7 @@ public interface IDynLocation extends Comparable<IDynLocation> {
      * @return removed IDynExit
      */
     public IDynExit removeExit(String dir);
+    public boolean containsOpenExit(String dir);
     public boolean containsExit(String dir);
     public IDynExit getExit(String dir);
     /**

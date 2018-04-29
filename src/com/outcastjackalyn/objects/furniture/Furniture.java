@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import com.outcastjackalyn.objects.IFurniture;
+import com.outcastjackalyn.scenes.LockState;
 import jjcard.text.game.IItem;
 import jjcard.text.game.impl.AbstractGameElement;
 import jjcard.text.game.impl.ItemUse;
@@ -25,6 +26,8 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     private int level;
     @JsonProperty("hid")
     private boolean hidden = false;
+    @JsonProperty("state")
+    private LockState lockState = LockState.ALWAYS_OPEN;
     @JsonProperty("mov")
     private boolean movable = true;
     @JsonProperty("use")
@@ -39,6 +42,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         private Map<String, IItem> inventory = MapUtil.newHashMap();
         private int level;
         private boolean hidden = false;
+        private LockState lockState = LockState.ALWAYS_OPEN;
         private boolean movable = true;
         private ItemUse use = ItemUse.Item;
 
@@ -52,6 +56,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
             inventory = furniture.inventory;
             level = furniture.level;
             hidden = furniture.hidden;
+            lockState = furniture.lockState;
             movable = furniture.movable;
             use = furniture.use;
         }
@@ -85,6 +90,11 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         @JsonProperty("hid")
         public Furniture.Builder hidden(boolean hidden){
             this.hidden = hidden;
+            return this;
+        }
+        @JsonProperty("state")
+        public Furniture.Builder lockState(boolean hidden){
+            this.lockState = lockState;
             return this;
         }
         @JsonProperty("mov")
@@ -123,6 +133,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         setCost(builder.cost);
         setLevel(builder.level);
         setHidden(builder.hidden);
+        setLockState(builder.lockState);
         setMovable(builder.movable);
         setUse(builder.use);
         setMoney(builder.money);
@@ -178,7 +189,10 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     }
 
 
-
+   /* public String getRoomFullDescription() {
+        String str = AbstractGameElement.getRoomDescription();
+        return ;
+    }*/
 
     public Furniture(String name){
         super(name);
@@ -195,6 +209,14 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public boolean isHidden(){
         return hidden;
     }
+    public boolean isOpen(){
+        boolean bool =  false;
+        if(this.lockState == LockState.ALWAYS_OPEN || this.lockState == LockState.UNLOCKED) {
+            bool = true;
+        }
+        return bool;
+    }
+    public LockState getLockState() { return lockState; }
     public boolean isMovable(){
         return movable;
     }
@@ -220,8 +242,11 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public void setHidden(boolean hidden){
         this.hidden = hidden;
     }
+    public void setLockState(LockState lockState){
+        this.lockState = lockState;
+    }
     /**
-     * returns true if item is movable and not hidden
+     * returns true if this object is movable and not hidden
      * @return
      */
     public boolean canGet(){
@@ -260,6 +285,9 @@ public class Furniture extends AbstractGameElement implements IFurniture {
             if (hidden != m.hidden){
                 return false;
             }
+            if (lockState != m.lockState){
+                return false;
+            }
             if (movable != m.movable){
                 return false;
             }
@@ -272,7 +300,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public int hashCode(){
         int start = super.hashCode();
         start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getKeysHash(inventory);
-        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, money, cost, level, hidden, movable, use);
+        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, money, cost, level, hidden, lockState, movable, use);
     }
 
     public String inventoryOverview(){

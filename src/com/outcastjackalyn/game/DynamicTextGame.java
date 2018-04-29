@@ -150,11 +150,13 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                     case DROP:
                         dropItem(token, object);
                         break;
-                    case EQUIP:
-                        equipItem(token, object);
+                    case EQUIP: // effect replaced with LOCK
+                        lock(token, object);
+                        //equipItem(token, object);
                         break;
-                    case UNEQUIP:
-                        unequipItem(token, object);
+                    case UNEQUIP: // effect replaced with UNLOCK
+                        unlock(token, object);
+                        //unequipItem(token, object);
                         break;
                     case INFO:
                         info(token, object);
@@ -277,6 +279,41 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
         }
 
     }
+
+    protected void lock(String token, TextToken<BasicTextTokenType> object) {
+        if(object.getType() == BasicTextTokenType.DIRECTION) {
+            if (worldUtil.lockExit(token)){
+                output.println("Locked!");
+            } else {
+                output.println("You can't lock that");
+            }
+
+        } else {
+            if (worldUtil.lockFurniture(token)){
+                output.println("Locked!");
+            } else {
+                output.println("You can't lock that");
+            }
+        }
+    }
+
+    protected void unlock(String token, TextToken<BasicTextTokenType> object) {
+        if(object.getType() == BasicTextTokenType.DIRECTION) {
+            if (worldUtil.unlockExit(token)) {
+                output.println("Opened!");
+            } else {
+                output.println("You can't open that");
+            }
+        } else {
+            if (worldUtil.unlockFurniture(token)) {
+                output.println("Opened!");
+            } else {
+                output.println("You can't open that");
+            }
+        }
+    }
+
+
 
     protected void movePlayer(String token, TextToken<BasicTextTokenType> object) {
         if (worldUtil.goDirection(token)){
