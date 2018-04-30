@@ -57,7 +57,7 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
             {NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
 
 
-    public LockableExit oppositeDirection(LockableExit entrance) {
+    public static LockableExit oppositeDirection(LockableExit entrance) {
         LockableExit exit = NORTH;
         switch (entrance.getName()) {
             case "NORTHWEST":

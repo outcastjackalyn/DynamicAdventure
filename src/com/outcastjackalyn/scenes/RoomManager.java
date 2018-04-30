@@ -5,9 +5,23 @@ import com.outcastjackalyn.objects.furniture.Furniture;
 import com.outcastjackalyn.objects.furniture.Furnitures;
 import com.outcastjackalyn.objects.items.Items;
 import com.outcastjackalyn.utils.AdjectiveUtil;
+import com.outcastjackalyn.utils.SeedUtil;
+import jjcard.text.game.IItem;
 import jjcard.text.game.impl.Item;
+import jjcard.text.game.util.MapUtil;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 public class RoomManager {
+
+    private static GameData gameData;
+
+    public RoomManager(GameData gameData) {
+        this.gameData = gameData;
+    }
 
     public static DynLocation newRoom(DynLocation location, int seed) {
         //String str = ((Integer) seed).toString();
@@ -18,7 +32,7 @@ public class RoomManager {
         //location = new DynLocation(room.getName(), room.getRoomDescription());
         System.out.println(" New room made yo");
         location = fillRoom(location, seed);
-        location = newExits(location, seed);
+        location = newExits(location, "123");
         return location;
     }
 
@@ -32,11 +46,13 @@ public class RoomManager {
         return location;
     }
 
-    private static void fillInventory(DynLocation location, int seed) {
+    private static Map<String, IItem> fillInventory(DynLocation location, int seed) {
 
+        Map<String, IItem> map = location.getInventory();
         for(int i = 0; i < seed; i++) {
             newItem(location, seed);
         }
+        return map;
     }
 
     private static Item newItem(DynLocation location, int seed) {
@@ -57,12 +73,49 @@ public class RoomManager {
         return furniture;
     }
 
-    public static DynLocation newExits(DynLocation location, int seed) {
-
+    public static DynLocation newExits(DynLocation location, String seed) {
+        //TODO make staircases enforce up downs
+        LockableExit previous = (LockableExit) location.getOnlyExit();
+        int numberOfExits = 1;
+        int j = 0;
+        for (int i = 0; i < numberOfExits; i++) {
+            int direction = SeedUtil.getDigitFromEnd(seed, i);
+            if(LockableExit.DEFAULT_VALUES[direction].getName().equals(previous.getName())) {
+                int newDirection = SeedUtil.getDigit(seed, 0);
+                if(direction == newDirection) {
+                    newDirection = new Random().nextInt(9);
+                    if(direction == newDirection) {
+                        newDirection ++;
+                    }
+                }
+                direction = newDirection;
+            }
+            for (LockableExit exit : LockableExit.DEFAULT_VALUES) {
+                if(j == direction) {
+                    newExit(location, seed, exit.getName());
+                }
+                j++;
+            }
+        }
 
         return location;
     }
 
+    public static void newExit(DynLocation location, String seed, String name) {
+        //TODO set lockstate with seed
+        LockState lockState = LockState.ALWAYS_OPEN;
+
+        DynLocation newLocation = new DynLocation("empty");
+
+        LockableExit exit = new LockableExit.Builder().name(name).location(newLocation).build();
+        LockableExit entrance = LockableExit.oppositeDirection(exit);
+        entrance.setLockState(lockState);
+
+        location.addExit(exit);
+        newLocation.addExit(entrance.getWithLocation(location));
+        gameData.addLocation(newLocation);
+
+    }
 
 
 }

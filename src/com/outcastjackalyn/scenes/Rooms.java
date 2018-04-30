@@ -3,8 +3,10 @@ package com.outcastjackalyn.scenes;
 public enum Rooms {
     HALLWAY("hallway", "A long $color$ hallway.", "amongst the dust"),
     ROOM("room", "A $adj$, $color$ room.", "on the floor"),
+    LOBBY("lobby", "A wide open lobby area.", "in the middle of the room" ),
     STAIR("stair", "A $adj$ staircase.", "on a step"),
-    EMPTY("empty", "", "");
+    //EMPTY("empty", "", "")
+    ;
 
     private String name;
     private String roomDescription;

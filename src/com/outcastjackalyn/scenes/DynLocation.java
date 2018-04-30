@@ -188,6 +188,13 @@ public class DynLocation implements IDynLocation {
     public IDynExit getExit(String dir){
         return MAP_UTIL.getItemFromMap(exits, dir);
     }
+
+    public IDynExit getOnlyExit() {
+        IDynExit e  = (IDynExit) exits.values().toArray()[1];
+        return e;
+    }
+
+
     @JsonIgnore
     public IMob getMob(String key){
         return MAP_UTIL.getItemFromMap(roomMob,key);
@@ -245,7 +252,7 @@ public class DynLocation implements IDynLocation {
     public String getInventoryDescriptions() {
         String str = DynamicDescriptionUtil.getConcealableRoomDescriptions(inventory, true);
         if(!isEmpty()) {
-            str = str + getInventoryDescription();
+            str = AdjectiveUtil.updateText(str, 0, getInventoryDescription());
         }
         return str;
     }

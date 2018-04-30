@@ -93,8 +93,10 @@ public class GameData {
         addFurniture(table);
 
         DynLocation hallway = new DynLocation("empty", "A long hallway with one torch.");
+
         start.addExit("NORTH", hallway);
         hallway.addExit(LockableExit.SOUTH.getWithLocation(start));
+
         addLocation(hallway);
 
         Mob mob = new Mob.Builder().name("Goblin").health(10).defense(1).attack(4).hostile(true).build();

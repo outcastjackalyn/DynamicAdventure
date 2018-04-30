@@ -2,6 +2,7 @@ package com.outcastjackalyn;
 
 import com.outcastjackalyn.game.DynamicTextGame;
 import com.outcastjackalyn.game.GameData;
+import com.outcastjackalyn.scenes.RoomManager;
 import jjcard.text.game.impl.*;
 import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.impl.BasicTextParser;
@@ -20,6 +21,7 @@ public class Main {
 
     public static DynamicTextGame game;
     public static GameData gameData;
+    public static RoomManager roomManager;
 
     public static JFrame frame = new JFrame("Dynamic Text Adventure");
 
@@ -70,7 +72,7 @@ public class Main {
 
 
         gameData = new GameData();
-
+        roomManager = new RoomManager(gameData);
 
 
         game = new DynamicTextGame(gameData);
