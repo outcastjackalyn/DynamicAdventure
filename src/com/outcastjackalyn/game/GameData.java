@@ -92,7 +92,7 @@ public class GameData {
         start.addFurniture(table);
         addFurniture(table);
 
-        DynLocation hallway = new DynLocation("hallway", "A long hallway with one torch.");
+        DynLocation hallway = new DynLocation("empty", "A long hallway with one torch.");
         start.addExit("NORTH", hallway);
         hallway.addExit(LockableExit.SOUTH.getWithLocation(start));
         addLocation(hallway);

@@ -3,8 +3,10 @@ package com.outcastjackalyn.utils;
 import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
 import com.outcastjackalyn.objects.IFurniture;
+import com.outcastjackalyn.scenes.DynLocation;
 import com.outcastjackalyn.scenes.IDynLocation;
 import com.outcastjackalyn.scenes.LockState;
+import com.outcastjackalyn.scenes.RoomManager;
 import jjcard.text.game.IArmour;
 import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
@@ -160,6 +162,9 @@ public class DynamicWorldUtil<P extends IMob>{
     public boolean goDirection(String key) {
         if (current.containsOpenExit(key)) {
             current = current.getExitLocation(key);
+            if(current.getName().equals("empty")) {
+                current = RoomManager.newRoom((DynLocation) current, 0);
+            }
             return true;
         }
         return false;
@@ -347,6 +352,13 @@ public class DynamicWorldUtil<P extends IMob>{
         if (object.getType().equals(BasicTextTokenType.PLAYER)) {
             return player.getViewDescription();
         }
+        /*if (object.getType().equals(BasicTextTokenType.WORDS)) {
+            for (IFurniture furniture : current.getFurnishings().values()) {
+                if(furniture.equals(object)) {
+                    return furniture.getViewDescription();
+                }
+            }
+        }*/
         return lookAt(object.getStandardToken());
     }
     /**
@@ -370,6 +382,9 @@ public class DynamicWorldUtil<P extends IMob>{
         if (roomContainsItem(key)) {
             return current.getItem(key);
         }
+        if (roomContainsFurniture(key)) {
+            return current.getFurniture(key);
+        }
         if (roomContainsMob(key)) {
             return current.getMob(key);
         }
@@ -378,6 +393,11 @@ public class DynamicWorldUtil<P extends IMob>{
         }
         if (roomContainsExit(key)){
             return current.getExit(key);
+        }
+        for (IFurniture furniture : current.getFurnishings().values()) {
+            if(furniture.containsItem(key)) {
+                return furniture.getItem(key);
+            }
         }
         return null;
     }
