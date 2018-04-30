@@ -16,14 +16,10 @@ import java.util.Map;
 
 @JsonDeserialize(builder = Furniture.Builder.class)
 public class Furniture extends AbstractGameElement implements IFurniture {
-    @JsonProperty("cost")
-    private int cost;
     @JsonProperty("money")
     private int money = 0;
     @JsonProperty("inven")
     private Map<String, IItem> inventory;
-    @JsonProperty("lvl")
-    private int level;
     @JsonProperty("hid")
     private boolean hidden = false;
     @JsonProperty("state")
@@ -32,41 +28,37 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     private boolean movable = true;
     @JsonProperty("use")
     private ItemUse use = ItemUse.Item;
+    @JsonProperty("invdescrip")
+    private String inventoryDescription;
     @JsonIgnore
     private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 
 
     public static class Builder extends AbstractGameElement.Builder{
-        private int cost;
         private int money = 0;
         private Map<String, IItem> inventory = MapUtil.newHashMap();
-        private int level;
         private boolean hidden = false;
         private LockState lockState = LockState.ALWAYS_OPEN;
         private boolean movable = true;
         private ItemUse use = ItemUse.Item;
+        private String inventoryDescription;
+
 
         public Builder(){
             super();
         }
         public Builder(Furniture furniture){
             super(furniture);
-            cost = furniture.cost;
             money = furniture.money;
             inventory = furniture.inventory;
-            level = furniture.level;
             hidden = furniture.hidden;
             lockState = furniture.lockState;
             movable = furniture.movable;
             use = furniture.use;
+            inventoryDescription = furniture.inventoryDescription;
         }
         public Builder(AbstractGameElement element){
             super(element);
-        }
-        @JsonProperty("cost")
-        public Furniture.Builder cost(int cost){
-            this.cost = cost;
-            return this;
         }
         @JsonProperty("money")
         public Furniture.Builder money(int money){
@@ -80,11 +72,6 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         }
         public Furniture.Builder addItem(IItem item){
             MAP_UTIL.addItemToMap(inventory, item);
-            return this;
-        }
-        @JsonProperty("lvl")
-        public Furniture.Builder level(int level){
-            this.level = level;
             return this;
         }
         @JsonProperty("hid")
@@ -105,6 +92,11 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         @JsonProperty("use")
         public Furniture.Builder use(ItemUse use){
             this.use = use;
+            return this;
+        }
+        @JsonProperty("invdescrip")
+        public Furniture.Builder inventoryDescription(String inventoryDescription){
+            this.inventoryDescription = inventoryDescription;
             return this;
         }
         public Furniture.Builder name(String name){
@@ -130,12 +122,11 @@ public class Furniture extends AbstractGameElement implements IFurniture {
 
     protected Furniture(Furniture.Builder builder){
         super(builder);
-        setCost(builder.cost);
-        setLevel(builder.level);
         setHidden(builder.hidden);
         setLockState(builder.lockState);
         setMovable(builder.movable);
         setUse(builder.use);
+        setInventoryDescription(builder.inventoryDescription);
         setMoney(builder.money);
         inventory = builder.inventory;
     }
@@ -197,12 +188,6 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public Furniture(String name){
         super(name);
     }
-    public int getCost() {
-        return cost;
-    }
-    public int getLevel(){
-        return level;
-    }
     public boolean isEmpty() {
         return inventory.isEmpty();
     }
@@ -223,22 +208,8 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public ItemUse getUse() {
         return use;
     }
+    public String getInventoryDescription() { return inventoryDescription; }
 
-    public void setCost(int costN){
-        cost = costN;
-    }
-    public void changeCost(int change){
-        setCost(cost + change);
-    }
-    public void changeLevel(int change){
-        setLevel(level + change);
-    }
-    public void setLevel(int level){
-        this.level = level;
-        if (doValidateFields() && level < 0){
-            level = 0;
-        }
-    }
     public void setHidden(boolean hidden){
         this.hidden = hidden;
     }
@@ -249,15 +220,14 @@ public class Furniture extends AbstractGameElement implements IFurniture {
      * returns true if this object is movable and not hidden
      * @return
      */
-    public boolean canGet(){
-        return movable && !hidden;
-    }
+  //  public boolean canGet(){  return movable && !hidden;  }
     public void setMovable(boolean movable){
         this.movable = movable;
     }
     public void setUse(ItemUse use){
         this.use = use;
     }
+    public void setInventoryDescription(String inventoryDescription) { this.inventoryDescription = inventoryDescription; }
     public boolean equals(Object o){
         if (o == this){
             return true;
@@ -270,16 +240,10 @@ public class Furniture extends AbstractGameElement implements IFurniture {
             if (!super.equals(o)){
                 return false;
             }
-            if (cost != m.cost){
-                return false;
-            }
             if (money != m.money){
                 return false;
             }
             if (ObjectsUtil.notEqualKeys(this.inventory, m.inventory)){
-                return false;
-            }
-            if (level != m.level){
                 return false;
             }
             if (hidden != m.hidden){
@@ -291,6 +255,9 @@ public class Furniture extends AbstractGameElement implements IFurniture {
             if (movable != m.movable){
                 return false;
             }
+            if (inventoryDescription != m.inventoryDescription){
+                return false;
+            }
             return this.use.equals(m.getUse());
         } else {
             return false;
@@ -300,7 +267,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
     public int hashCode(){
         int start = super.hashCode();
         start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getKeysHash(inventory);
-        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, money, cost, level, hidden, lockState, movable, use);
+        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, money, hidden, lockState, movable, use, inventoryDescription);
     }
 
     public String inventoryOverview(){

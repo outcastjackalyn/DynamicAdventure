@@ -7,7 +7,30 @@ public enum Items {
     PAPER("a piece of paper", "You find the letters :$code$ scrawled on the page.", "A dusty scrap of paper $pos$.", true),
     KEY("key", "A $adj$ $color$ key.", "Something shiny can be seen $pos$.", true);
 
-    Items(String name, String viewDescription, String roomDescription, boolean movable) {
 
+    private String name;
+    private String roomDescription;
+    private String viewDescription;
+    private boolean movable;
+
+
+    public String getName() {
+        return name;
+    }
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+    public String getViewDescription() {
+        return viewDescription;
+    }
+    public boolean getMovable() { return movable; }
+
+
+
+    Items(String name, String viewDescription, String roomDescription, boolean movable) {
+        this.name = name;
+        this.roomDescription = roomDescription;
+        this.viewDescription = viewDescription;
+        this.movable = movable;
     }
 }

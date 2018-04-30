@@ -51,12 +51,6 @@ public interface IFurniture extends ConcealableGameElement {
 
     public void setUse(ItemUse use);
 
-    /**
-     * returns true if item can be retrieved by the player
-     * @return
-     */
-    public boolean canGet();
-
     public void setLockState(LockState lockState);
 
     public LockState getLockState();
@@ -65,9 +59,5 @@ public interface IFurniture extends ConcealableGameElement {
 
     public void setMovable(boolean movable);
 
-    public int getCost();
-
-    public int getLevel();
-
-
+    public String getInventoryDescription();
 }

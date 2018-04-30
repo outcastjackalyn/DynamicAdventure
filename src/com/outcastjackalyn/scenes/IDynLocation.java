@@ -31,6 +31,7 @@ public interface IDynLocation extends Comparable<IDynLocation> {
     public Map<String, IDynExit> getExits();
 
 
+    public boolean isEmpty();
     public void setInventory(Map<String, IItem> inventory);
     public void setFurnishings(Map<String, IFurniture> furnishings);
     public void setMobs(Map<String, IMob> mobs);
@@ -133,7 +134,7 @@ public interface IDynLocation extends Comparable<IDynLocation> {
      */
     @JsonIgnore
     default public String getFurnishingsDescriptions(){
-        return DynamicDescriptionUtil.getConceableRoomDescriptions(getFurnishings(), true);
+        return DynamicDescriptionUtil.getConcealableRoomDescriptions(getFurnishings(), true);
     }
 
     /**
@@ -146,7 +147,7 @@ public interface IDynLocation extends Comparable<IDynLocation> {
      */
     @JsonIgnore
     default public String getInventoryDescriptions(){
-        return DynamicDescriptionUtil.getConceableRoomDescriptions(getInventory(), true);
+        return DynamicDescriptionUtil.getConcealableRoomDescriptions(getInventory(), true);
     }
     /**
      * Gets the description for each mob. Must be non-null
@@ -158,7 +159,7 @@ public interface IDynLocation extends Comparable<IDynLocation> {
      */
     @JsonIgnore
     default public String getMobDescriptions(){
-        return DynamicDescriptionUtil.getConceableRoomDescriptions(getMobs(), true);
+        return DynamicDescriptionUtil.getConcealableRoomDescriptions(getMobs(), true);
     }
 
 }

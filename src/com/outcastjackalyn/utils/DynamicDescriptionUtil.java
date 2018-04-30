@@ -82,7 +82,7 @@ public final class DynamicDescriptionUtil {
      * @return the comma separated String
      * @see #getConcealableStream(Collection, boolean)
      */
-    public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
+    public static <I extends ConcealableGameElement> String getConcealableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
         return getConceableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
     }
     /**

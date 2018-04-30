@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.outcastjackalyn.objects.IFurniture;
+import com.outcastjackalyn.utils.AdjectiveUtil;
 import com.outcastjackalyn.utils.DynamicDescriptionUtil;
 import jjcard.text.game.IItem;
 import com.outcastjackalyn.scenes.IDynLocation;
@@ -28,9 +29,11 @@ public class DynLocation implements IDynLocation {
     @JsonIgnore
     private static final MapUtil MAP_UTIL = MapUtil.getInstance();
     @JsonProperty("name")
-    private final String name;
+    private String name;
     @JsonProperty("descrip")
     private String description;
+    @JsonProperty("invdescrip")
+    private String inventoryDescription;
     @JsonProperty("inventory")
     private Map<String, IItem >inventory;
     @JsonProperty("furnishings")
@@ -46,30 +49,43 @@ public class DynLocation implements IDynLocation {
     public DynLocation(String name, String description){
         this.name = name;
         this.description = description;
+        this.inventoryDescription = "on the floor";
         inventory = newHashMap();
         furnishings = newHashMap();
         roomMob =  newHashMap();
         exits = newHashMap();
     }
-    public DynLocation(String name, String description, Map<String, IItem> inventory){
+    public DynLocation(String name, String description, String inventoryDescription){
         this.name = name;
         this.description = description;
+        this.inventoryDescription = inventoryDescription;
+        inventory = newHashMap();
+        furnishings = newHashMap();
+        roomMob =  newHashMap();
+        exits = newHashMap();
+    }
+    public DynLocation(String name, String description, String inventoryDescription, Map<String, IItem> inventory){
+        this.name = name;
+        this.description = description;
+        this.inventoryDescription = inventoryDescription;
         setInventory(inventory);
         furnishings = newHashMap();
         roomMob =  newHashMap();
         exits = newHashMap();
     }
-    public DynLocation(String name, String description, Map<String, IItem> inventory, Map<String, IFurniture> furnishings){
+    public DynLocation(String name, String description, String inventoryDescription, Map<String, IItem> inventory, Map<String, IFurniture> furnishings){
         this.name = name;
         this.description = description;
+        this.inventoryDescription = inventoryDescription;
         setInventory(inventory);
         setFurnishings(furnishings);
         roomMob =  newHashMap();
         exits = newHashMap();
     }
-    public DynLocation(String name, String description, Map<String, IItem> inventory, Map<String, IFurniture> furnishings, Map<String, IMob>  mobs){
+    public DynLocation(String name, String description, String inventoryDescription, Map<String, IItem> inventory, Map<String, IFurniture> furnishings, Map<String, IMob>  mobs){
         this.name = name;
         this.description = description;
+        this.inventoryDescription = inventoryDescription;
         setInventory(inventory);
         setFurnishings(furnishings);
         setMobs(mobs);
@@ -83,6 +99,10 @@ public class DynLocation implements IDynLocation {
     public String getDescription(){
         return description;
     }
+    @JsonProperty("invdescrip")
+    public String getInventoryDescription(){
+        return inventoryDescription;
+    }
     @JsonProperty("inventory")
     public Map<String, IItem> getInventory(){
         return inventory;
@@ -92,7 +112,7 @@ public class DynLocation implements IDynLocation {
         return furnishings;
     }
     @JsonProperty("mobs")
-    public  Map<String, IMob> getMobs() {
+    public Map<String, IMob> getMobs() {
         return roomMob;
     }
     @JsonProperty("exits")
@@ -203,6 +223,15 @@ public class DynLocation implements IDynLocation {
     public void setDescription(String descrip){
         description = descrip;
     }
+    @JsonProperty("invdescrip")
+    public void setInventoryDescription(String descrip){
+        description = descrip;
+    }
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int compareTo(IDynLocation other) {
         int compare = getName().compareTo(other.getName());
         if (compare == 0){
@@ -214,19 +243,32 @@ public class DynLocation implements IDynLocation {
         return DynamicDescriptionUtil.getConcealableNames(exits, true);
     }
     public String getInventoryDescriptions() {
-        return DynamicDescriptionUtil.getConceableRoomDescriptions(inventory, true);
+        String str = DynamicDescriptionUtil.getConcealableRoomDescriptions(inventory, true);
+        if(!isEmpty()) {
+            str = str + getInventoryDescription();
+        }
+        return str;
     }
+
+
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
+
     public String getFurnishingsDescriptions() {
-        String str = DynamicDescriptionUtil.getConceableRoomDescriptions(furnishings, true);
+        String str = DynamicDescriptionUtil.getConcealableRoomDescriptions(furnishings, true);
         for(IFurniture furniture : furnishings.values()) {
             if(furniture.isOpen()) {
-                str = str + " " + DynamicDescriptionUtil.getConceableRoomDescriptions(furniture.getInventory(), true);
+                if (!furniture.isEmpty()) {
+                    str = str + " " + DynamicDescriptionUtil.getConcealableRoomDescriptions(furniture.getInventory(), true);
+                    str = AdjectiveUtil.updateText(str, 0, furniture.getInventoryDescription());
+                }
             }
         }
         return str;
     }
     public String getMobDescriptions(){
-        return DynamicDescriptionUtil.getConceableRoomDescriptions(roomMob, true);
+        return DynamicDescriptionUtil.getConcealableRoomDescriptions(roomMob, true);
     }
     /**
      * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
@@ -243,6 +285,9 @@ public class DynLocation implements IDynLocation {
                 return false;
             }
             if (notEqual(description, l.description)){
+                return false;
+            }
+            if (notEqual(inventoryDescription, l.inventoryDescription)){
                 return false;
             }
             if (ObjectsUtil.notEqualKeys(inventory, l.inventory)){
@@ -272,6 +317,12 @@ public class DynLocation implements IDynLocation {
         start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(inventory);
         start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(furnishings);
         start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(roomMob);
-        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, name, description);
+        return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, name, description, inventoryDescription);
     }
+
+
+
+   /* public void setDescription(String description) {
+        this.description = description;
+    }*/
 }
