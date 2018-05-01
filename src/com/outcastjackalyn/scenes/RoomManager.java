@@ -10,10 +10,7 @@ import jjcard.text.game.IItem;
 import jjcard.text.game.impl.Item;
 import jjcard.text.game.util.MapUtil;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RoomManager {
 
@@ -74,32 +71,32 @@ public class RoomManager {
     }
 
     public static DynLocation newExits(DynLocation location, String seed) {
-        //TODO make staircases enforce up downs
         LockableExit previous = (LockableExit) location.getOnlyExit();
         int numberOfExits = 1;
-        int j = 0;
-        for (int i = 0; i < numberOfExits; i++) {
-            int direction = SeedUtil.getDigitFromEnd(seed, i);
-            if(LockableExit.DEFAULT_VALUES[direction].getName().equals(previous.getName())) {
-                int newDirection = SeedUtil.getDigit(seed, 0);
-                if(direction == newDirection) {
-                    newDirection = new Random().nextInt(9);
-                    if(direction == newDirection) {
-                        newDirection ++;
-                    }
-                }
-                direction = newDirection;
-            }
-            for (LockableExit exit : LockableExit.DEFAULT_VALUES) {
-                if(j == direction) {
-                    newExit(location, seed, exit.getName());
-                }
-                j++;
-            }
+        for (LockableExit exit : getDirections(numberOfExits, previous, location.getName().equals("stair"))) {
+            newExit(location, seed, exit.getName());
         }
 
         return location;
     }
+
+    private static LockableExit[] getDirections(int numberOfExits, LockableExit previous, boolean staircase) {
+        LockableExit[] directions = LockableExit.DEFAULT_VALUES;
+        ArrayList<LockableExit> dirs = new ArrayList<LockableExit>(Arrays.asList(directions));
+        dirs.remove(previous);
+        for (int i = dirs.size(); i <= numberOfExits; i--) {
+            if(staircase) {
+                //TODO make staircases enforce up downs
+                dirs.remove(new Random().nextInt(dirs.size()));
+            } else {
+                dirs.remove(new Random().nextInt(dirs.size()));
+            }
+        }
+        directions = dirs.toArray(new LockableExit[dirs.size()]);
+        return directions;
+
+    }
+
 
     public static void newExit(DynLocation location, String seed, String name) {
         //TODO set lockstate with seed
