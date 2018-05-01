@@ -190,7 +190,7 @@ public class DynLocation implements IDynLocation {
     }
 
     public IDynExit getOnlyExit() {
-        IDynExit e  = (IDynExit) exits.values().toArray()[1];
+        IDynExit e  = (IDynExit) exits.values().toArray()[0];
         return e;
     }
 
@@ -231,8 +231,8 @@ public class DynLocation implements IDynLocation {
         description = descrip;
     }
     @JsonProperty("invdescrip")
-    public void setInventoryDescription(String descrip){
-        description = descrip;
+    public void setInventoryDescription(String invdescrip){
+        inventoryDescription = invdescrip;
     }
     @JsonProperty("name")
     public void setName(String name) {

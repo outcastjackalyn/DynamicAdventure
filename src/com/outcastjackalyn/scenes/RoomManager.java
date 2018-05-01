@@ -71,30 +71,34 @@ public class RoomManager {
     }
 
     public static DynLocation newExits(DynLocation location, String seed) {
-        LockableExit previous = (LockableExit) location.getOnlyExit();
+        String previous = location.getOnlyExit().getName();
         int numberOfExits = 1;
-        for (LockableExit exit : getDirections(numberOfExits, previous, location.getName().equals("stair"))) {
-            newExit(location, seed, exit.getName());
+        ArrayList<String> directions = getDirections(numberOfExits, previous, location.getName().equals("stair"));
+        for (String direction : directions) {
+            newExit(location, seed, direction);
         }
 
         return location;
     }
 
-    private static LockableExit[] getDirections(int numberOfExits, LockableExit previous, boolean staircase) {
-        LockableExit[] directions = LockableExit.DEFAULT_VALUES;
-        ArrayList<LockableExit> dirs = new ArrayList<LockableExit>(Arrays.asList(directions));
-        dirs.remove(previous);
-        for (int i = dirs.size(); i <= numberOfExits; i--) {
+    private static ArrayList<String> getDirections(int numberOfExits, String previous, boolean staircase) {
+
+        ArrayList<String> directions = new ArrayList<String>();
+        for(LockableExit exit : LockableExit.DEFAULT_VALUES)
+        {
+            directions.add(exit.getName());
+        }
+        directions.remove(previous);
+        for (int i = directions.size(); i > numberOfExits; i--) {
             if(staircase) {
                 //TODO make staircases enforce up downs
-                dirs.remove(new Random().nextInt(dirs.size()));
+                directions.remove(new Random().nextInt(directions.size()));
             } else {
-                dirs.remove(new Random().nextInt(dirs.size()));
+                directions.remove(new Random().nextInt(directions.size()));
             }
         }
-        directions = dirs.toArray(new LockableExit[dirs.size()]);
+        //directions = dirs.toArray(new LockableExit[dirs.size()]);
         return directions;
-
     }
 
 

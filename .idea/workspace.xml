@@ -18,7 +18,7 @@
       <file leaf-file-name="GameData.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="153">
               <caret line="97" column="67" selection-start-line="97" selection-start-column="67" selection-end-line="97" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -30,8 +30,8 @@
       <file leaf-file-name="LockableExit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/LockableExit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="115" column="41" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="41" />
+            <state relative-caret-position="1751">
+              <caret line="223" selection-start-line="223" selection-end-line="223" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,51 +39,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Items.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Items.java">
+      <file leaf-file-name="AbstractGameElement.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/AbstractGameElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="119">
+              <caret line="123" selection-start-line="123" selection-end-line="123" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rooms.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Rooms.java">
+      <file leaf-file-name="DynamicDescriptionUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/DynamicDescriptionUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            <state relative-caret-position="799">
+              <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoomManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoomManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/RoomManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="87" column="27" lean-forward="true" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+            <state relative-caret-position="152">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3885#3899#0" expanded="true" />
+                <element signature="e#3189#3197#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Exits.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Exits.java">
+      <file leaf-file-name="AdjectiveUtil.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/AdjectiveUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="139" selection-start-line="12" selection-start-column="139" selection-end-line="12" selection-end-column="139" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SeedUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/SeedUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+              <caret line="12" column="54" lean-forward="true" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -91,8 +85,8 @@
       <file leaf-file-name="DynLocation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/DynLocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3706">
-              <caret line="302" column="70" selection-start-line="302" selection-start-column="70" selection-end-line="302" selection-end-column="70" />
+            <state relative-caret-position="231">
+              <caret line="228" column="28" lean-forward="true" selection-start-line="228" selection-start-column="28" selection-end-line="228" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,6 +136,7 @@
       <find>name</find>
       <find>can</find>
       <find>, inventoryDescription</find>
+      <find>$</find>
     </findStrings>
     <replaceStrings>
       <replace>com.outcastjackalyn.objects.Furniture</replace>
@@ -151,6 +146,7 @@
       <replace>DynamicDescriptionUtil</replace>
       <replace>IDynLocation</replace>
       <replace>DynLocation</replace>
+      <replace>#</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -182,22 +178,22 @@
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Room.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/NPCs/NPCs.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/utils/DynamicWorldUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Items.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furnitures.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furniture.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/utils/DynamicDescriptionUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/utils/AdjectiveUtil.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/IFurniture.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/IDynLocation.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/DynLocation.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/utils/SeedUtil.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/LockableExit.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Rooms.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Direction.java" />
-        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Exits.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/LockableExit.java" />
         <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/RoomManager.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/DynLocation.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Exits.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/utils/AdjectiveUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Rooms.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Items.java" />
+        <option value="$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furnitures.java" />
       </list>
     </option>
   </component>
@@ -439,17 +435,18 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.49926794" weight="0.3288889" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3288889" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.50073206" weight="0.34074074" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.50073206" visible="true" weight="0.34074074" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21669106" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21669106" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -463,7 +460,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3288889" />
-      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.49926794" weight="0.3288889" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -471,7 +467,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/RoomManager.java</url>
+          <line>26</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -531,13 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/util/ObjectsUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1383">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/util/Experimental.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -563,13 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
           <caret line="102" column="42" lean-forward="true" selection-start-line="102" selection-start-column="42" selection-end-line="107" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/AbstractGameElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -640,6 +630,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="318" column="28" selection-start-line="318" selection-start-column="28" selection-end-line="318" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -722,41 +715,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/AdjectiveUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/NPCs/NPCs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furnitures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/DynamicDescriptionUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-442">
-          <caret line="79" column="22" lean-forward="true" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -784,43 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/DynLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3706">
-          <caret line="302" column="70" selection-start-line="302" selection-start-column="70" selection-end-line="302" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="97" column="67" selection-start-line="97" selection-start-column="67" selection-end-line="97" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/LockableExit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="115" column="41" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Items.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furniture.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2704">
@@ -838,28 +763,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Exits.java">
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/game/GameData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="139" selection-start-line="12" selection-start-column="139" selection-end-line="12" selection-end-column="139" />
+        <state relative-caret-position="153">
+          <caret line="97" column="67" selection-start-line="97" selection-start-column="67" selection-end-line="97" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Rooms.java">
+    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/util/ObjectsUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="204">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#514#515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/DynLocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="228" column="28" lean-forward="true" selection-start-line="228" selection-start-column="28" selection-end-line="228" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/RoomManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="87" column="27" lean-forward="true" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+        <state relative-caret-position="152">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3885#3899#0" expanded="true" />
+            <element signature="e#3189#3197#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/NPCs/NPCs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/items/Items.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/objects/furniture/Furnitures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="9" column="95" selection-start-line="9" selection-start-column="95" selection-end-line="9" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../TextAdventurePackage/TextAdventurePackage/src/jjcard/text/game/impl/AbstractGameElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Exits.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="79" selection-start-line="11" selection-start-column="79" selection-end-line="11" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/Rooms.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding>
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#594#595#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/DynamicDescriptionUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/scenes/LockableExit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="223" selection-start-line="223" selection-end-line="223" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/outcastjackalyn/utils/AdjectiveUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="54" lean-forward="true" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
         </state>
       </provider>
     </entry>

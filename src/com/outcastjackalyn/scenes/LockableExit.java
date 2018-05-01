@@ -54,7 +54,7 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
      * List that includes all static default LockableExits
      */
     public static final LockableExit[] DEFAULT_VALUES = new LockableExit[]
-            {NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
+            {NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST, UP, DOWN};
 
 
     public static LockableExit oppositeDirection(LockableExit entrance) {

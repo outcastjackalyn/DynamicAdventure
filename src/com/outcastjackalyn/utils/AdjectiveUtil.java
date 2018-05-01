@@ -7,10 +7,10 @@ public class AdjectiveUtil {
     public static String[] codes = {"RXF", "PPL", "WEZ", "ASP", "4SP", "BCY", "MTJ", "GVY"};
 
     public static String updateText(String str, int seed, String inventoryDescription) {
-        str.replaceAll("$pos$", inventoryDescription);
-        str.replaceAll("$adj$", adjectives[seed]);
-        str.replaceAll("$code$", codes[seed]);
-        str.replaceAll("$color$", colors[seed]);
+        str = str.replaceAll("#pos#", inventoryDescription);
+        str = str.replaceAll("#adj#", adjectives[seed]);
+        str = str.replaceAll("#code#", codes[seed]);
+        str = str.replaceAll("#color#", colors[seed]);
         return str;
     }
 }
