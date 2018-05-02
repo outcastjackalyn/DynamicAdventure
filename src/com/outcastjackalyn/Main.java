@@ -24,6 +24,7 @@ public class Main {
     public static RoomManager roomManager;
 
     public static JFrame frame = new JFrame("Dynamic Text Adventure");
+    public static JLabel outputFeed = new JLabel("<html>Welcome...<br>");
 
 
     public static int printedLines = 0;
@@ -39,7 +40,7 @@ public class Main {
         int width = 500;
         JPanel gui = new JPanel(new BorderLayout());
         gui.setBorder(new EmptyBorder(5,5,5,5));
-        JLabel outputFeed = new JLabel("<html>Welcome...<br>");
+        //JLabel outputFeed = new JLabel("<html>Welcome...<br>");
         JTextField entry = new JTextField(100);
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, entry.getFont().getSize());
         gui.setBackground(Color.BLACK);
@@ -95,22 +96,16 @@ public class Main {
                 process(str);
             }
 
+
+
             private void process(String str) {
-
-                printedLines++;
-
-                if(printedLines > Line_Max) {
-                    outputStr = cycleText(outputStr);
-                }
-                if(str.indexOf("<br>") > Char_Max) {
-                    printedLines++;
-                    if(printedLines > Line_Max) {
-                        outputStr = cycleText(outputStr);
-                    }
-                }
                 outputStr = outputStr + str;
-                //checkPrintedLines(outputStr);
-                outputFeed.setText("<html>" + outputStr);
+                printedLines = count(outputStr, "<br>");
+                if(printedLines > Line_Max) {
+                    outputStr = cycle(outputStr);
+                }
+                updateDisplay();
+                printedLines = count(outputStr, "<br>");
                 System.out.println("Line "+ printedLines + " printed: \"" + str + "\"");
             }
         });
@@ -120,13 +115,22 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(entry.getText().length() > 0) {
                     game.setInString(entry.getText());
-                    game.getOuput().println(">>" + entry.getText());
+                    game.getOutput().println(">>" + entry.getText());
                     entry.setText("");
+                    gameData.setSeedValue(System.currentTimeMillis());
+                    System.out.println("Seed: " + gameData.getSeed());
+                }
+                else {
+                    updateDisplay();
                 }
             }
         });
 
 
+    }
+
+    private static void updateDisplay() {
+        outputFeed.setText("<html>" + outputStr);
     }
 
 
@@ -136,21 +140,36 @@ public class Main {
     }
 
 
-
-    private static String cycleText(String str){
-        int i = 1;
-        int endLine = outputStr.indexOf("<br>");
-        str = removeTopLine(outputStr, endLine + 4);
-        if(endLine > Char_Max) {
-            i++;
+    private static String cycle(String string) {
+        String str = string;
+        int endLine;
+        for(int i = 0; i < printedLines - Line_Max; i++)
+        {
+            endLine = string.indexOf("<br>");
+            str = removeTopLine(string, endLine + 4);
+            string = str;
         }
-        printedLines -= i;
-       // checkPrintedLines(str);
-       /* if(printedLines > Line_Max) {
-            cycleText(str);
-        }*/
-
         return str;
+    }
+
+
+    public static int count(String string, String substring)
+    {
+        int count = 0;
+        int idx = 0;
+        int last = 0;
+        int extra = 0;
+        while ((idx = string.indexOf(substring, idx)) >= 0)
+        {
+            extra = (idx - last) / Char_Max;
+            if(extra > 0) {
+                count += extra;
+            }
+            last = idx;
+            idx++;
+            count++;
+        }
+        return count;
     }
 
 

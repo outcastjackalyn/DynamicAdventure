@@ -2,11 +2,10 @@ package com.outcastjackalyn.utils;
 
 import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
+import com.outcastjackalyn.game.GameData;
 import com.outcastjackalyn.objects.IFurniture;
-import com.outcastjackalyn.scenes.DynLocation;
-import com.outcastjackalyn.scenes.IDynLocation;
-import com.outcastjackalyn.scenes.LockState;
-import com.outcastjackalyn.scenes.RoomManager;
+import com.outcastjackalyn.objects.furniture.Furnitures;
+import com.outcastjackalyn.scenes.*;
 import jjcard.text.game.IArmour;
 import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
@@ -40,10 +39,24 @@ public class DynamicWorldUtil<P extends IMob>{
         if(roomContainsExit(token)) {
             if(current.getExit(token).getLockState() == LockState.LOCKED) {
                 current.getExit(token).setLockState(LockState.UNLOCKED);
+                current.getExit(token).getLocation() // unlock the door on both sides
+                        .getExit(LockableExit.oppositeDirection(((LockableExit) current.getExit(token))))
+                        .setLockState(LockState.UNLOCKED);
                 return true;
             }
             else if(current.getExit(token).getLockState() == LockState.BLOCKED) {
                 current.getExit(token).setLockState(LockState.ALWAYS_OPEN);
+                current.getExit(token).setRoomDescription(Exits.OPENING.getRoomDescription());
+                current.getExit(token).setViewDescription(Exits.OPENING.getViewDescription());
+                current.getExit(token).getLocation() // and from the other side
+                        .getExit(LockableExit.oppositeDirection(((LockableExit) current.getExit(token))))
+                        .setLockState(LockState.ALWAYS_OPEN);
+                current.getExit(token).getLocation() // and from the other side
+                        .getExit(LockableExit.oppositeDirection(((LockableExit) current.getExit(token))))
+                        .setRoomDescription(Exits.OPENING.getRoomDescription());
+                current.getExit(token).getLocation() // and from the other side
+                        .getExit(LockableExit.oppositeDirection(((LockableExit) current.getExit(token))))
+                        .setViewDescription(Exits.OPENING.getViewDescription());
                 return true;
             }
         }
@@ -159,11 +172,11 @@ public class DynamicWorldUtil<P extends IMob>{
      * @param key
      * @return if current contains exit and current changed
      */
-    public boolean goDirection(String key) {
+    public boolean goDirection(String key, GameData gameData) {
         if (current.containsOpenExit(key)) {
             current = current.getExitLocation(key);
             if(current.getName().equals("empty")) {
-                current = RoomManager.newRoom((DynLocation) current, 0);
+                current = RoomManager.newRoom((DynLocation) current, gameData.getSeed());
             }
             return true;
         }
@@ -352,13 +365,18 @@ public class DynamicWorldUtil<P extends IMob>{
         if (object.getType().equals(BasicTextTokenType.PLAYER)) {
             return player.getViewDescription();
         }
-        /*if (object.getType().equals(BasicTextTokenType.WORDS)) {
-            for (IFurniture furniture : current.getFurnishings().values()) {
-                if(furniture.equals(object)) {
-                    return furniture.getViewDescription();
+        if (object.getType().equals(BasicTextTokenType.WORDS)) {
+            if(!current.getFurnishings().containsValue(object))
+            {
+                for (IDynExit exit : current.getExits().values()) {
+                    if(exit.getHiddenName().equals(object.getStandardToken())) {
+                        current.getExit(exit.getName()).setHidden(false);
+                        current.getExit(exit.getName()).getLocation().getExit(LockableExit.oppositeDirection((LockableExit) current.getExit(exit.getName()))).setHidden(false);
+                        return exit.getViewDescription() + "<br> You've found a secret passage!<br>" + exit.getRoomDescription();
+                    }
                 }
             }
-        }*/
+        }
         return lookAt(object.getStandardToken());
     }
     /**

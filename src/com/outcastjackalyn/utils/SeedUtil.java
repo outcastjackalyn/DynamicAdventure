@@ -7,7 +7,7 @@ public class SeedUtil {
     }
 
     public static int getDigitFromEnd(String seed, int index) {
-        return Character.getNumericValue(seed.charAt(index > seed.length() ? 0 : seed.length() - index));
+        return Character.getNumericValue(seed.charAt(index > seed.length() ? 0 : seed.length() - index - 1));
     }
 
     public static int getLength(String seed) {
@@ -27,6 +27,7 @@ public class SeedUtil {
         }
         return seed.contains(substring);
     }
+
 
 
 }

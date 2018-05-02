@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.outcastjackalyn.scenes.IDynExit;
+import com.outcastjackalyn.scenes.LockableExit;
 import jjcard.text.game.ConcealableGameElement;
 import jjcard.text.game.IGameElement;
 import com.outcastjackalyn.scenes.IDynLocation;
@@ -17,8 +19,9 @@ import com.outcastjackalyn.scenes.IDynLocation;
 public final class DynamicDescriptionUtil {
     private static final String COMMA_DELIMINATOR = ", ";
     private static final char SPACE = ' ';
+    private static final char PERIOD = '.';
     private static final String EMPTY = "";
-    public static final String DEFAULT_EXIT_START = "The obvious exits are ";
+    public static final String DEFAULT_EXIT_START = "<br>You look for a way out:<br>";
     private DynamicDescriptionUtil(){
         //all static methods
     }
@@ -34,6 +37,17 @@ public final class DynamicDescriptionUtil {
         }
         final boolean includeHidden = !excludeHidden;
         return elements.stream().filter((e) -> includeHidden || !e.isHidden());
+    }
+    /**
+     * Returns stream that is empty of elements is null or empty, otherwise returns stream with elements filtered out depending on <code> excludeHidden</code>
+     * @param elements
+     * @return Stream
+     */
+    public static <I extends ConcealableGameElement> Stream<I> getHiddenStream(Collection<I> elements){
+        if (elements == null || elements.isEmpty()){
+            return Stream.empty();
+        }
+        return elements.stream().filter((e) -> e.isHidden());
     }
     /**
      * Returns comma separated String of element names, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -83,7 +97,7 @@ public final class DynamicDescriptionUtil {
      * @see #getConcealableStream(Collection, boolean)
      */
     public static <I extends ConcealableGameElement> String getConcealableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
-        return getConceableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
+        return getConcealableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
     }
     /**
      * Returns comma separated String of element room descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -92,9 +106,33 @@ public final class DynamicDescriptionUtil {
      * @return the comma separated String
      * @see #getConcealableStream(Collection, boolean)
      */
-    public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Collection<I> elements, final boolean excludeHidden){
+    public static <I extends ConcealableGameElement> String getConcealableRoomDescriptions(Collection<I> elements, final boolean excludeHidden){
         return getConcealableStream(elements, excludeHidden).map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
     }
+
+    /**
+     * Returns comma separated String of element hidden descriptions
+     * @param elements
+     * @return the comma separated String
+     * @see #getConcealableStream(Collection, boolean)
+     */
+    public static <I extends IDynExit> String getConcealableHiddenDescriptions(Map<?,I> elements){
+        return getConcealableHiddenDescriptions(elements == null? null: elements.values());
+    }
+
+    /**
+     * Returns comma separated String of element hidden descriptions
+     * @param elements
+     * @return the comma separated String
+     * @see #getConcealableStream(Collection, boolean)
+     */
+    public static <I extends IDynExit> String getConcealableHiddenDescriptions(Collection<I> elements){
+        return getHiddenStream(elements).map(I::getHiddenDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
+    }
+
+
+
+
 
     /**
      * Returns comma separated String of element view descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -103,8 +141,8 @@ public final class DynamicDescriptionUtil {
      * @return the comma separated String
      * @see #getConcealableStream(Collection, boolean)
      */
-    public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Map<?,I> elements, final boolean excludeHidden){
-        return getConceableViewDescriptions(elements == null? null: elements.values(), excludeHidden);
+    public static <I extends ConcealableGameElement> String getConcealableViewDescriptions(Map<?,I> elements, final boolean excludeHidden){
+        return getConcealableViewDescriptions(elements == null? null: elements.values(), excludeHidden);
     }
     /**
      * Returns comma separated String of element view descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -113,7 +151,7 @@ public final class DynamicDescriptionUtil {
      * @return the comma separated String
      * @see #getConcealableStream(Collection, boolean)
      */
-    public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Collection<I> elements, final boolean excludeHidden){
+    public static <I extends ConcealableGameElement> String getConcealableViewDescriptions(Collection<I> elements, final boolean excludeHidden){
         return getConcealableStream(elements, excludeHidden).map(I::getViewDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
     }
 
@@ -147,20 +185,33 @@ public final class DynamicDescriptionUtil {
         if (location == null){
             return EMPTY;
         }
-        final String _exitStart = exitStart == null? "": exitStart;
+        final String _exitStart = exitStart == null ? "" : exitStart;
         final StringBuilder re = new StringBuilder(location.getDescription());
         String curDescrip;
+        boolean isFurniture = true;
+        if (!(curDescrip = location.getMobDescriptions()).isEmpty()){
+            re.append(SPACE).append(curDescrip).append(PERIOD);
+        }
         if (!(curDescrip = location.getFurnishingsDescriptions()).isEmpty()){
             re.append(SPACE).append(curDescrip);
         }
-        if (!(curDescrip = location.getInventoryDescriptions()).isEmpty()){
-            re.append(SPACE).append(curDescrip);
+        else {
+            isFurniture = false;
         }
-        if (!(curDescrip = location.getMobDescriptions()).isEmpty()){
-            re.append(SPACE).append(curDescrip);
+        if (!(curDescrip = location.getHiddenExitsDescriptions()).isEmpty()){
+            if(isFurniture) {
+                re.append(COMMA_DELIMINATOR).append(curDescrip).append(PERIOD);
+            } else {
+                re.append(SPACE).append(curDescrip).append(PERIOD);
+            }
+        } else if (isFurniture) {
+            re.append(PERIOD);
+        }
+        if (!(curDescrip = location.getInventoryDescriptions()).isEmpty()){
+            re.append(SPACE).append(curDescrip).append(PERIOD);
         }
         if (!(curDescrip = location.getExitsDescriptions()).isEmpty()){
-            re.append(SPACE).append(_exitStart).append(curDescrip);
+            re.append(SPACE).append(_exitStart).append(curDescrip).append(PERIOD);
         }
         return re.toString();
     }

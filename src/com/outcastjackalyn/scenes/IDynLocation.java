@@ -162,4 +162,8 @@ public interface IDynLocation extends Comparable<IDynLocation> {
         return DynamicDescriptionUtil.getConcealableRoomDescriptions(getMobs(), true);
     }
 
+    @JsonIgnore
+    default public String getHiddenExitsDescriptions() {
+        return DynamicDescriptionUtil.getConcealableHiddenDescriptions(getExits());
+    }
 }

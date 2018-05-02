@@ -57,41 +57,41 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
             {NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST, UP, DOWN};
 
 
-    public static LockableExit oppositeDirection(LockableExit entrance) {
-        LockableExit exit = NORTH;
+    public static String oppositeDirection(LockableExit entrance) {
+        String str = "NORTH";
         switch (entrance.getName()) {
             case "NORTHWEST":
-                exit = SOUTHEAST;
+                str = SOUTHEAST.getName();
                 break;
             case "NORTHEAST" :
-                exit = SOUTHWEST;
+                str = SOUTHWEST.getName();
                 break;
             case "NORTH":
-                exit = SOUTH;
+                str = SOUTH.getName();
                 break;
             case "SOUTHEAST":
-                exit = NORTHWEST;
+                str = NORTHWEST.getName();
                 break;
             case "SOUTHWEST":
-                exit = NORTHEAST;
+                str = NORTHEAST.getName();
                 break;
             case "SOUTH":
-                exit = NORTH;
+                str = NORTH.getName();
                 break;
             case "EAST":
-                exit = WEST;
+                str = WEST.getName();
                 break;
             case "WEST":
-                exit = EAST;
+                str = EAST.getName();
                 break;
             case "UP":
-                exit = DOWN;
+                str = DOWN.getName();
                 break;
             case "DOWN":
-                exit = UP;
+                str = UP.getName();
                 break;
         }
-        return exit;
+        return str;
     }
 
     @JsonProperty("loc")
@@ -103,10 +103,27 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
     @JsonProperty("state")
     private LockState lockState = LockState.ALWAYS_OPEN;
 
+
+    @JsonProperty("roomdescrip")
+    private String roomDescription = "";
+    @JsonProperty("viewdescrip")
+    private String viewDescription = "";
+    @JsonProperty("hiddendescrip")
+    private String hiddenDescription = "";
+    @JsonProperty("hiddenname")
+    private String hiddenName = "";
+
+
+
     public static class Builder extends AbstractGameElement.Builder{
         private IDynLocation location;
         private boolean hidden = false;
-        private LockState lockState;
+        private LockState lockState = LockState.ALWAYS_OPEN;
+        private String roomDescription = " a door rests a ajar";
+        private String viewDescription =  "It's a door. Maybe go through it?";
+        private String hiddenDescription = "";
+        private String hiddenName = "";
+
 
         public Builder(){
             super();
@@ -122,8 +139,24 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
             super.name(name);
             return this;
         }
-        public LockableExit.Builder roomDescription(String roomDescrip){
-            super.roomDescription(roomDescrip);
+        @JsonProperty("roomdescrip")
+        public LockableExit.Builder roomDescription(String roomDescription){
+            this.roomDescription = roomDescription;
+            return this;
+        }
+        @JsonProperty("viewdescrip")
+        public LockableExit.Builder viewDescription(String viewDescription){
+            this.viewDescription = viewDescription;
+            return this;
+        }
+        @JsonProperty("hiddendescrip")
+        public LockableExit.Builder hiddenDescription(String hiddenDescription){
+            this.hiddenDescription = hiddenDescription;
+            return this;
+        }
+        @JsonProperty("hiddenname")
+        public LockableExit.Builder hiddenName(String hiddenName){
+            this.hiddenName = hiddenName;
             return this;
         }
         @JsonProperty("loc")
@@ -163,7 +196,11 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
         super(builder);
         this.location = builder.location;
         this.hidden = builder.hidden;
-        this.lockState = lockState;
+        this.lockState = builder.lockState;
+        this.roomDescription = builder.roomDescription;
+        this.viewDescription = builder.viewDescription;
+        this.hiddenDescription = builder.hiddenDescription;
+        this.hiddenName = builder.hiddenName;
     }
 
 
@@ -206,6 +243,44 @@ public class LockableExit extends AbstractGameElement implements IDynExit {
         this.lockState = lockState;
     }
 
+    public void setHiddenDescription(String hiddenDescription) {
+        this.hiddenDescription = hiddenDescription;
+    }
+
+    public void setHiddenName(String hiddenName) {
+        this.hiddenName = hiddenName;
+    }
+    @Override
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
+    }
+
+    @Override
+    public void setViewDescription(String viewDescription) {
+        this.viewDescription = viewDescription;
+    }
+
+    public String getHiddenDescription() {
+        return hiddenDescription;
+    }
+
+    @Override
+    public String getHiddenName() {
+        return hiddenName;
+    }
+
+    //@Override
+    public String getRoomDescription() {
+        String str = getName().substring(0, 1) + getName().substring(1).toLowerCase();
+        str = str + roomDescription;
+        str = str.replaceAll("#lock#", lockState.name().toLowerCase());
+        return str;
+    }
+
+    //@Override
+    public String getViewDescription() {
+        return viewDescription;
+    }
 
     public boolean isOpen(){
         boolean bool =  false;

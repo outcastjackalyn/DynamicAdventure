@@ -1,8 +1,14 @@
 package com.outcastjackalyn.game;
+
+import com.outcastjackalyn.objects.NPCs.NPCs;
 import com.outcastjackalyn.objects.furniture.Furniture;
+import com.outcastjackalyn.objects.furniture.Furnitures;
+import com.outcastjackalyn.objects.items.Items;
 import com.outcastjackalyn.objects.player.PlayerData;
 import com.outcastjackalyn.scenes.DynLocation;
+import com.outcastjackalyn.scenes.Exits;
 import com.outcastjackalyn.scenes.LockableExit;
+import com.outcastjackalyn.scenes.Rooms;
 import jjcard.text.game.impl.*;
 import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.impl.BasicTextParser;
@@ -13,7 +19,8 @@ import java.util.ArrayList;
 
 public class GameData {
 
-    private String seed = "000000";
+    private long seedValue = System.currentTimeMillis();
+    private String seed = "00000000000000000000000000";
 
     private ArrayList<Mob> mobs;
     private ArrayList<Item> items;
@@ -44,28 +51,49 @@ public class GameData {
     public Player getPlayer() { return player;}
     public DynLocation getStart() { return start;}
 
+    public String getSeed() {
+        return seed;
+    }
+    public void setSeed(String seed) {
+        this.seed = seed;
+    }
+
+    public long getSeedValue() { return seedValue; }
+    public void setSeedValue(long seedValue) { this.seedValue += seedValue; setSeed(String.valueOf(this.seedValue)); }
 
     public ITextParser<BasicTextTokenType> getParser(){ //not written by me
         if (parser == null){
             parser = new BasicTextParser<>();
-            TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(
-                    BasicTextTokenType.values())
+            TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values())
                     .putAll(BasicTextTokenType.DIRECTION, LockableExit.DEFAULT_VALUES)
-                    .putAll(BasicTextTokenType.ITEM, "coin", "item", "apple")
                     //I have re-purposed a number of BasicTextTokenTypes that i don't intend to use for the time-being
                     // without needing to change or duplicate the file
-                    // WORDS - is used to indicate FURNITURE
-                    .putAll(BasicTextTokenType.WORDS, "table")
                     // EQUIP - is used in place of LOCK
                     .putAll(BasicTextTokenType.EQUIP, "lock", "close")
                     // UNEQUIP - is used in place of UNLOCK
                     .putAll(BasicTextTokenType.UNEQUIP, "unlock", "open")
-                    .putAll(BasicTextTokenType.WEAPON, "shank")
-                    .putAll(BasicTextTokenType.ENEMY, "goblin")
-                    .putAll(BasicTextTokenType.ARMOR, "wool")
+                    .putAll(BasicTextTokenType.LOOK, "examine")
                     .putAll(BasicTextTokenType.GET, "take");
+            for(Items item : Items.values()) {
+                dictionary.putAll(BasicTextTokenType.ITEM, item.getName());
+            }
+            for(Furnitures furniture : Furnitures.values()) {
+                // WORDS - is used to indicate FURNITURE and hidden EXITS
+                dictionary.putAll(BasicTextTokenType.WORDS, furniture.getName());
+            }
+            for(Exits exit : Exits.values()) {
+                // WORDS - is used to indicate FURNITURE and hidden EXITS
+                dictionary.putAll(BasicTextTokenType.WORDS, exit.getHiddenName());
+            }
+            for(NPCs npc : NPCs.values()) {
+                if(npc.isHostile()) {
+                    dictionary.putAll(BasicTextTokenType.ENEMY, npc.getName());
+                } else {
+                    dictionary.putAll(BasicTextTokenType.NPC, npc.getName());
+                }
+            }
+
             parser.setTextDictionary(dictionary);
-            //TODO make this less tedious..
         }
         return parser;
     }
@@ -80,15 +108,15 @@ public class GameData {
         setLocations(new ArrayList<DynLocation>());
 
         player = new Player.Builder().name("player1").maxHealth(50).health(50).defense(8).attack(5).build();
-        start = new DynLocation("entry room", "A dimly lit room.");
+        start = Rooms.build(new DynLocation("", ""), Rooms.START);
         addLocation(start);
 
 
-        Item apple = new Item.Builder().name("apple").roomDescription("There is an apple on the table.").viewDescription("It is shiny and red.").build();
+        Item apple = new Item.Builder().name("apple").roomDescription("There is an apple on the table").viewDescription("It is shiny and red.").build();
         //start.addItem(apple);
         addItem(apple);
 
-        Furniture table = new Furniture.Builder().name("table").roomDescription("There is an circular wooden table.").viewDescription("This is a table only big enough for two to eat at.").movable(false).addItem(apple).build();
+        Furniture table = new Furniture.Builder().name("table").roomDescription("There is an circular wooden table").viewDescription("This is a table only big enough for two to eat at.").movable(false).addItem(apple).build();
         start.addFurniture(table);
         addFurniture(table);
 
@@ -106,9 +134,6 @@ public class GameData {
         addMob(mob);
 
     }
-
-
-
 
 
 }

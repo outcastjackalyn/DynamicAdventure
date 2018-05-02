@@ -5,6 +5,7 @@ import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
 import java.io.PrintStream;
 import java.io.*;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
@@ -37,12 +38,14 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
     @Override
     public void setUp() {
-
+        output.println(START_UP);
         output.println(worldUtil.getCurrent().showRoom());
         // TODO Auto-generated method stub
     }
 
     protected String inString = "";
+    protected String START_UP = "You find yourself alone in a strange room, " +
+            "there are no windows and you can't remember how you got here. You are willed by an unconscious urge to escape.";
 
     public String getInString() {
         return inString;
@@ -115,7 +118,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
     public ITextParser<BasicTextTokenType> getTextParser() {
         return parser;
     }
-    public PrintStream getOuput() {
+    public PrintStream getOutput() {
         return output;
     }
     public void setOutput(PrintStream out) {
@@ -169,15 +172,17 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                 }
             }
             // For objects that can also be used to infer their verbs
-            switch (object.getType()) {
-                case DIRECTION:
-                    movePlayer(token, object);
-                    break;
-                case INVENTORY:
-                    info(token, object);
-                    break;
-                default:
-                    return;
+            else {
+                switch (object.getType()) {
+                    case DIRECTION:
+                        movePlayer(token, object);
+                        break;
+                    case INVENTORY:
+                        info(token, object);
+                        break;
+                    default:
+                        return;
+                }
             }
 
         } else {
@@ -316,7 +321,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
 
     protected void movePlayer(String token, TextToken<BasicTextTokenType> object) {
-        if (worldUtil.goDirection(token)){
+        if (worldUtil.goDirection(token, gameData)){
             output.println(worldUtil.getCurrent().showRoom());
         } else {
             output.println("You can't go that direction.");

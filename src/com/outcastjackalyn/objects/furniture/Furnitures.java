@@ -3,11 +3,11 @@ package com.outcastjackalyn.objects.furniture;
 import com.outcastjackalyn.scenes.LockState;
 
 public enum Furnitures {
-    TABLE("table", "There is an #adj# wooden table.", "on the table", LockState.ALWAYS_OPEN),
-    CHAIR("chair", "You see a small chair.", "under the chair", LockState.ALWAYS_OPEN),
-    WARDROBE("wardrobe", "A #adj# wardrobe stands against the wall.", "in the wardrobe", LockState.BLOCKED),
-    CHEST("chest", "You see a wooden box ... is that a treasure chest?" , "in the chest", LockState.LOCKED),
-    BED("bed", "This must have been a bedroom, there's a #adj# bed here.", "between the #color# sheets", LockState.ALWAYS_OPEN);
+    TABLE("table", "There is a #adj# wooden table", "on the table", LockState.ALWAYS_OPEN),
+    CHAIR("chair", "You see a small chair", "under the chair", LockState.ALWAYS_OPEN),
+    WARDROBE("wardrobe", "A #adj# wardrobe stands against the wall", "in the wardrobe", LockState.BLOCKED),
+    CHEST("chest", "You see a wooden box - maybe it has useful contents" , "in the chest", LockState.LOCKED),
+    BED("bed", "This must have been a bedroom - there's a #adj# bed here", "between the #color# sheets", LockState.ALWAYS_OPEN);
 
 
 

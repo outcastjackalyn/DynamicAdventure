@@ -1,6 +1,7 @@
 package com.outcastjackalyn.scenes;
 
 
+import static com.outcastjackalyn.Main.gameData;
 import static jjcard.text.game.util.MapUtil.newHashMap;
 import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
@@ -246,13 +247,16 @@ public class DynLocation implements IDynLocation {
         }
         return compare;
     }
-    public String getExitsDescriptions(){
-        return DynamicDescriptionUtil.getConcealableNames(exits, true);
+    public String getExitsDescriptions() {
+        return DynamicDescriptionUtil.getConcealableRoomDescriptions(exits, true);
+    }
+    public String getHiddenExitsDescriptions(){
+        return DynamicDescriptionUtil.getConcealableHiddenDescriptions(exits);
     }
     public String getInventoryDescriptions() {
         String str = DynamicDescriptionUtil.getConcealableRoomDescriptions(inventory, true);
         if(!isEmpty()) {
-            str = AdjectiveUtil.updateText(str, 0, getInventoryDescription());
+            str = AdjectiveUtil.updateText(str, gameData.getSeed(), getInventoryDescription());
         }
         return str;
     }
@@ -267,8 +271,8 @@ public class DynLocation implements IDynLocation {
         for(IFurniture furniture : furnishings.values()) {
             if(furniture.isOpen()) {
                 if (!furniture.isEmpty()) {
-                    str = str + " " + DynamicDescriptionUtil.getConcealableRoomDescriptions(furniture.getInventory(), true);
-                    str = AdjectiveUtil.updateText(str, 0, furniture.getInventoryDescription());
+                    str = str + ": " + DynamicDescriptionUtil.getConcealableRoomDescriptions(furniture.getInventory(), true);
+                    str = AdjectiveUtil.updateText(str, gameData.getSeed(), furniture.getInventoryDescription());
                 }
             }
         }

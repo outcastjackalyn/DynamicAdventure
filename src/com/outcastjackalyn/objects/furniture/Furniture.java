@@ -80,7 +80,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
             return this;
         }
         @JsonProperty("state")
-        public Furniture.Builder lockState(boolean hidden){
+        public Furniture.Builder lockState(LockState lockState){
             this.lockState = lockState;
             return this;
         }

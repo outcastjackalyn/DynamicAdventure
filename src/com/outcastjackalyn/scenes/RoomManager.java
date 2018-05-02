@@ -5,6 +5,8 @@ import com.outcastjackalyn.objects.furniture.Furniture;
 import com.outcastjackalyn.objects.furniture.Furnitures;
 import com.outcastjackalyn.objects.items.Items;
 import com.outcastjackalyn.utils.AdjectiveUtil;
+import com.outcastjackalyn.utils.AdjectiveUtil.*;
+import com.outcastjackalyn.utils.DynamicDescriptionUtil;
 import com.outcastjackalyn.utils.SeedUtil;
 import jjcard.text.game.IItem;
 import jjcard.text.game.impl.Item;
@@ -20,59 +22,76 @@ public class RoomManager {
         this.gameData = gameData;
     }
 
-    public static DynLocation newRoom(DynLocation location, int seed) {
-        //String str = ((Integer) seed).toString();
-        Rooms room = Rooms.values()[seed];
+    public static DynLocation newRoom(DynLocation location, String seed) {
+        int number = SeedUtil.getDigit(seed, 1);
+        Rooms room = Rooms.values()[number >= Rooms.values().length ? 0 : number];
         location.setName(room.getName());
-        location.setDescription(AdjectiveUtil.updateText(room.getRoomDescription(), seed, ""));
+        location.setDescription(AdjectiveUtil.updateText(room.getRoomDescription(), seed));
         location.setInventoryDescription(room.getInventoryDescription());
-        //location = new DynLocation(room.getName(), room.getRoomDescription());
-        System.out.println(" New room made yo");
         location = fillRoom(location, seed);
-        location = newExits(location, "123");
+        location = newExits(location, seed);
         return location;
     }
 
-    public static DynLocation fillRoom(DynLocation location, int seed) {
+    public static DynLocation fillRoom(DynLocation location, String seed) {
 
-        for(int i = 0; i < seed; i++) {
-            location.addFurniture(newFurniture(location, seed));
+        int numberOfFurniture = 0;
+        if (SeedUtil.containsStraight(seed, new Random().nextInt(5), 1, 2)) {
+            numberOfFurniture++;
         }
-        fillInventory(location, seed);
+        if (SeedUtil.getDigitFromEnd(seed, numberOfFurniture + 3) < new Random().nextInt(7)) {
+            numberOfFurniture++;
+        }
+        for(int i = 0; i < numberOfFurniture; i++) {
+            location.addFurniture(newFurniture(location, seed, i));
+        }
+        location.setInventory(fillInventory(location, seed, 0));
 
         return location;
     }
 
-    private static Map<String, IItem> fillInventory(DynLocation location, int seed) {
+    private static Map<String, IItem> fillInventory(DynLocation location, String seed, int numberOfItems) {
 
-        Map<String, IItem> map = location.getInventory();
-        for(int i = 0; i < seed; i++) {
-            newItem(location, seed);
+        Map<String, IItem> inventory = location.getInventory();
+        if (SeedUtil.containsStraight(seed, new Random().nextInt(10), 0, 3)) {
+            numberOfItems++;
         }
-        return map;
+        if (SeedUtil.getDigitFromEnd(seed, numberOfItems) < 2) {
+            numberOfItems++;
+        }
+        for(int i = 0; i < numberOfItems; i++) {
+            Item item = newItem(location, seed, i);
+            inventory.put(item.getName(),item);
+        }
+        return inventory;
     }
 
-    private static Item newItem(DynLocation location, int seed) {
-        Items i = Items.values()[seed];
+    private static Item newItem(DynLocation location, String seed, int number) {
+        int j = SeedUtil.getDigit(seed,3 + number);
+        Items i = Items.values()[j > 4 ? j - 5 : j];
         Item item = new Item.Builder().name(i.getName())
-                .roomDescription(AdjectiveUtil.updateText(i.getRoomDescription(),seed, ""))
-                .viewDescription(i.getViewDescription()).build();
+                .roomDescription(AdjectiveUtil.updateText(i.getRoomDescription(),seed))
+                .viewDescription(AdjectiveUtil.updateText(i.getViewDescription(), seed)).build();
         return item;
     }
 
-    private static Furniture newFurniture(DynLocation location, int seed) {
-        Furnitures f = Furnitures.values()[seed];
-        Furniture furniture = new Furniture.Builder().name(f.getName())
-                .roomDescription(AdjectiveUtil.updateText(f.getRoomDescription(), seed, ""))
-                .inventoryDescription(AdjectiveUtil.updateText(f.getInventoryDescription(), seed, ""))
+    private static Furniture newFurniture(DynLocation location, String seed, int number) {
+        int i = SeedUtil.getDigit(seed,8 + number);
+        Furnitures f = Furnitures.values()[i > 4 ? i -5 : i];
+        Furniture furniture = new Furniture.Builder().name(f.getName()).lockState(f.getLockState())
+                .roomDescription(AdjectiveUtil.updateText(f.getRoomDescription(), seed))
+                .viewDescription(AdjectiveUtil.updateText("It is a " + f.getName() + ".", seed))
+                .inventoryDescription(AdjectiveUtil.updateText(f.getInventoryDescription(), seed))
                 .build();
-        fillInventory(location, seed);
+        furniture.setInventory(fillInventory(location, seed, 1));
         return furniture;
     }
 
     public static DynLocation newExits(DynLocation location, String seed) {
         String previous = location.getOnlyExit().getName();
         int numberOfExits = 1;
+
+
         ArrayList<String> directions = getDirections(numberOfExits, previous, location.getName().equals("stair"));
         for (String direction : directions) {
             newExit(location, seed, direction);
@@ -97,23 +116,29 @@ public class RoomManager {
                 directions.remove(new Random().nextInt(directions.size()));
             }
         }
-        //directions = dirs.toArray(new LockableExit[dirs.size()]);
         return directions;
     }
 
 
     public static void newExit(DynLocation location, String seed, String name) {
-        //TODO set lockstate with seed
-        LockState lockState = LockState.ALWAYS_OPEN;
-
         DynLocation newLocation = new DynLocation("empty");
+        Exits e = Exits.selectExit(seed);
+        LockState lock = e.getLockState();
 
-        LockableExit exit = new LockableExit.Builder().name(name).location(newLocation).build();
-        LockableExit entrance = LockableExit.oppositeDirection(exit);
-        entrance.setLockState(lockState);
+        LockableExit exit = new LockableExit.Builder().name(name).location(newLocation)
+                .roomDescription(AdjectiveUtil.updateText(e.getRoomDescription(), seed))
+                .viewDescription(AdjectiveUtil.updateText(e.getViewDescription(), seed))
+                .hiddenDescription(AdjectiveUtil.updateText(e.getHiddenDescription(), seed ))
+                .hidden(e.getHidden()).lockState(lock).hiddenName(e.getHiddenName()).build();
+
+        LockableExit entrance = new LockableExit.Builder().name(LockableExit.oppositeDirection(exit)).location(location)
+                .roomDescription(AdjectiveUtil.updateText(e.getRoomDescription(), seed))
+                .viewDescription(AdjectiveUtil.updateText(e.getViewDescription(), seed))
+                .hiddenDescription(AdjectiveUtil.updateText(e.getHiddenDescription(), seed ))
+                .hidden(e.getHidden()).lockState(lock).hiddenName(e.getHiddenName()).build();
 
         location.addExit(exit);
-        newLocation.addExit(entrance.getWithLocation(location));
+        newLocation.addExit(entrance);
         gameData.addLocation(newLocation);
 
     }
