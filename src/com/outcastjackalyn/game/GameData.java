@@ -127,11 +127,6 @@ public class GameData {
 
         addLocation(hallway);
 
-        Mob mob = new Mob.Builder().name("Goblin").health(10).defense(1).attack(4).hostile(true).build();
-        mob.setRoomDescription("it's a goblin probably.");
-        mob.setViewDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
-        hallway.addMob(mob);
-        addMob(mob);
 
     }
 

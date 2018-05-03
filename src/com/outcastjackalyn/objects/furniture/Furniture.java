@@ -140,7 +140,7 @@ public class Furniture extends AbstractGameElement implements IFurniture {
         return inventory;
     }
     public IItem getItem(String key){
-        return MAP_UTIL.getItemFromMap(inventory, key);
+        return MAP_UTIL.getItemFromLowercaseMap(inventory, key);
     }
 
 

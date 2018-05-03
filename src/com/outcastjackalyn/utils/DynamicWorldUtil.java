@@ -215,6 +215,7 @@ public class DynamicWorldUtil<P extends IMob>{
         IItem re = current.getItem(key);
         if (re != null && re.canGet()) {
             player.addItem(re);
+            //current.removeItem(key);
             return true;
         }
         return false;
@@ -229,6 +230,7 @@ public class DynamicWorldUtil<P extends IMob>{
         IItem re = furniture.getItem(key);
         if (re != null && re.canGet()) {
             player.addItem(re);
+            furniture.removeItem(key);
             return true;
         }
         return false;
@@ -468,7 +470,7 @@ public class DynamicWorldUtil<P extends IMob>{
         } else {
             for (IFurniture furniture : current.getFurnishings().values()) {
                 if(playerGetItemFromFurniture(furniture, key)) {
-                    furniture.removeItem(key);
+                    //furniture.removeItem(key);
                     return ReturnStatus.SUCCESS;
                 } else {
                     return ReturnStatus.FAILURE;

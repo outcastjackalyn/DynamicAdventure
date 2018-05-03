@@ -69,7 +69,7 @@ public class RoomManager {
     private static Item newItem(DynLocation location, String seed, int number) {
         int j = SeedUtil.getDigit(seed,3 + number);
         Items i = Items.values()[j > 4 ? j - 5 : j];
-        Item item = new Item.Builder().name(i.getName())
+        Item item = new Item.Builder().name(i.getName()).movable(i.getMovable())
                 .roomDescription(AdjectiveUtil.updateText(i.getRoomDescription(),seed))
                 .viewDescription(AdjectiveUtil.updateText(i.getViewDescription(), seed)).build();
         return item;
