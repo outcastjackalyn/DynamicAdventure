@@ -230,11 +230,10 @@ public class DynamicWorldUtil<P extends IMob>{
         IItem re = furniture.getItem(key);
         if (re != null && re.canGet()) {
             player.addItem(re);
-            furniture.removeItem(key);
+            //furniture.removeItem(key);
             return true;
         }
-        return false;
-    }
+        return false;    }
 
 
     public String showCurrentRoom() {
@@ -469,11 +468,13 @@ public class DynamicWorldUtil<P extends IMob>{
             }
         } else {
             for (IFurniture furniture : current.getFurnishings().values()) {
-                if(playerGetItemFromFurniture(furniture, key)) {
-                    //furniture.removeItem(key);
-                    return ReturnStatus.SUCCESS;
-                } else {
-                    return ReturnStatus.FAILURE;
+                if(furniture.containsItem(key)) {
+                    if (playerGetItemFromFurniture(furniture, key)) {
+                         furniture.removeItem(key);
+                        return ReturnStatus.SUCCESS;
+                    } else {
+                        return ReturnStatus.FAILURE;
+                    }
                 }
             }
             return ReturnStatus.NOT_FOUND;

@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.io.*;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import com.outcastjackalyn.utils.DynamicWorldUtil;
@@ -180,6 +181,9 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                     case INVENTORY:
                         info(token, object);
                         break;
+                    case HEALTH:
+                        info(token, object);
+                        break;
                     default:
                         return;
                 }
@@ -273,8 +277,14 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
             case MONEY:
                 output.println(player.getMoney());
                 break;
-            case HEALTH:
-                output.println(player.getHealth());
+            case HEALTH:// this is used to for displaying the entire dictionary of the game
+                String out = "";
+                Set<String> words = gameData.getDictionary();
+                for(String s : words) {
+                    out = out.concat(s).concat(", ");
+                }
+
+                output.println(out);
                 break;
             case MAX_HEALTH:
                 output.println(player.getMaxHealth());

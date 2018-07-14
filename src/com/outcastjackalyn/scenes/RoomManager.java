@@ -45,12 +45,12 @@ public class RoomManager {
         for(int i = 0; i < numberOfFurniture; i++) {
             location.addFurniture(newFurniture(location, seed, i));
         }
-        location.setInventory(fillInventory(location, seed, 0));
+        location.setInventory(fillRoomInventory(location, seed, 0));
 
         return location;
     }
 
-    private static Map<String, IItem> fillInventory(DynLocation location, String seed, int numberOfItems) {
+    private static Map<String, IItem> fillRoomInventory(DynLocation location, String seed, int numberOfItems) {
 
         Map<String, IItem> inventory = location.getInventory();
         if (SeedUtil.containsStraight(seed, new Random().nextInt(10), 0, 3)) {
@@ -60,18 +60,37 @@ public class RoomManager {
             numberOfItems++;
         }
         for(int i = 0; i < numberOfItems; i++) {
-            Item item = newItem(location, seed, i);
-            inventory.put(item.getName(),item);
+            Item item = newItem(seed, i);
+            location.addItem(item);
+            //inventory.put(item.getName(),item);
         }
         return inventory;
     }
 
-    private static Item newItem(DynLocation location, String seed, int number) {
+    private static Map<String, IItem> fillFurnitureInventory(Furniture furniture, String seed, int numberOfItems) {
+
+        Map<String, IItem> inventory = furniture.getInventory();
+        if (SeedUtil.containsStraight(seed, new Random().nextInt(10), 0, 3)) {
+            numberOfItems++;
+        }
+        if (SeedUtil.getDigitFromEnd(seed, numberOfItems) < 2) {
+            numberOfItems++;
+        }
+        for(int i = 0; i < numberOfItems; i++) {
+            Item item = newItem(seed, i);
+            furniture.addItem(item);
+            //inventory.put(item.getName(),item);
+        }
+        return inventory;
+    }
+
+    private static Item newItem(String seed, int number) {
         int j = SeedUtil.getDigit(seed,3 + number);
         Items i = Items.values()[j > 4 ? j - 5 : j];
         Item item = new Item.Builder().name(i.getName()).movable(i.getMovable())
                 .roomDescription(AdjectiveUtil.updateText(i.getRoomDescription(),seed))
                 .viewDescription(AdjectiveUtil.updateText(i.getViewDescription(), seed)).build();
+        gameData.addItem(item);
         return item;
     }
 
@@ -83,14 +102,17 @@ public class RoomManager {
                 .viewDescription(AdjectiveUtil.updateText("It is a " + f.getName() + ".", seed))
                 .inventoryDescription(AdjectiveUtil.updateText(f.getInventoryDescription(), seed))
                 .build();
-        furniture.setInventory(fillInventory(location, seed, 1));
+        furniture.setInventory(fillFurnitureInventory(furniture, seed, 1));
+        gameData.addFurniture(furniture);
         return furniture;
     }
 
     public static DynLocation newExits(DynLocation location, String seed) {
         String previous = location.getOnlyExit().getName();
         int numberOfExits = 1;
-
+        if (SeedUtil.getDigit(seed, 1) < 3) {
+            numberOfExits++;
+        }
 
         ArrayList<String> directions = getDirections(numberOfExits, previous, location.getName().equals("stair"));
         for (String direction : directions) {
@@ -122,7 +144,7 @@ public class RoomManager {
 
     public static void newExit(DynLocation location, String seed, String name) {
         DynLocation newLocation = new DynLocation("empty");
-        Exits e = Exits.selectExit(seed);
+        Exits e = Exits.selectExit(seed, gameData);
         LockState lock = e.getLockState();
 
         LockableExit exit = new LockableExit.Builder().name(name).location(newLocation)
@@ -140,7 +162,7 @@ public class RoomManager {
         location.addExit(exit);
         newLocation.addExit(entrance);
         gameData.addLocation(newLocation);
-
+        gameData.addExit(exit, entrance);
     }
 
 

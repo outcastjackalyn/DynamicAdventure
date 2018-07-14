@@ -14,8 +14,11 @@ import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.impl.BasicTextParser;
 import jjcard.text.game.parser.impl.BasicTextTokenType;
 import jjcard.text.game.parser.impl.TextDictionary;
+import jjcard.text.game.util.MapUtil;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 public class GameData {
 
@@ -26,15 +29,25 @@ public class GameData {
     private ArrayList<Item> items;
     private ArrayList<DynLocation> locations;
     private ArrayList<Furniture> furnishings;
+    private Map<LockableExit, LockableExit> exits;
+    private ArrayList<String> associated;
     private Player player;
     private DynLocation start;
 
     private ITextParser<BasicTextTokenType> parser;
 
-
     public ArrayList<Mob> getMobs() { return mobs; }
     public void setMobs(ArrayList<Mob> mobs) { this.mobs = mobs; }
     public void addMob(Mob mob) { mobs.add(mob); }
+
+    public ArrayList<String> getAssociated() {
+        return associated;
+    }
+    public void setAssociated(ArrayList<String> associated) {
+        this.associated = associated;
+    }
+    public void addAssociated(String associated) { this.associated.add(associated); }
+    public void removeAssociated(String associated) { this.associated.remove(associated); }
 
     public ArrayList<Item> getItems() { return items; }
     public void setItems(ArrayList<Item> items) { this.items = items; }
@@ -48,8 +61,12 @@ public class GameData {
     public void setLocations(ArrayList<DynLocation> locations) { this.locations = locations; }
     public void addLocation(DynLocation location) { locations.add(location); }
 
-    public Player getPlayer() { return player;}
-    public DynLocation getStart() { return start;}
+    public Map<LockableExit, LockableExit> getExits() { return exits; }
+    public void setExits(Map<LockableExit, LockableExit>  exits) { this.exits = exits; }
+    public void addExit(LockableExit exit, LockableExit entrance) { exits.put(exit, entrance); }
+
+    public Player getPlayer() { return player; }
+    public DynLocation getStart() { return start; }
 
     public String getSeed() {
         return seed;
@@ -59,21 +76,36 @@ public class GameData {
     }
 
     public long getSeedValue() { return seedValue; }
-    public void setSeedValue(long seedValue) { this.seedValue += seedValue; setSeed(String.valueOf(this.seedValue)); }
+    public void setSeedValue(long seedValue) {
+        this.seedValue += seedValue;
+        String seed = String.valueOf(this.seedValue);
+        String subStr = String.valueOf(seedValue);
+        subStr = subStr.substring(subStr.length() - 2);
+        seed = subStr.concat(seed);
+        //this.seedValue = Long.valueOf(seed);
+        setSeed(seed);
+    }
 
-    public ITextParser<BasicTextTokenType> getParser(){ //not written by me
-        if (parser == null){
+    public Set<String> getDictionary() {
+        Set<String> strings = parser.getTextDictionary().keySet();
+        return strings;
+    }
+    public ITextParser<BasicTextTokenType> setParser(){
+        if (parser == null) {
             parser = new BasicTextParser<>();
             TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values())
                     .putAll(BasicTextTokenType.DIRECTION, LockableExit.DEFAULT_VALUES)
                     //I have re-purposed a number of BasicTextTokenTypes that i don't intend to use for the time-being
-                    // without needing to change or duplicate the file
+                    // without needing to change or duplicate the file from the library
                     // EQUIP - is used in place of LOCK
                     .putAll(BasicTextTokenType.EQUIP, "lock", "close")
                     // UNEQUIP - is used in place of UNLOCK
                     .putAll(BasicTextTokenType.UNEQUIP, "unlock", "open")
+                    //HEALTH - is used in place CHEAT (i.e. display all words in the dictionary.
+                    .putAll(BasicTextTokenType.HEALTH, "cheat")
                     .putAll(BasicTextTokenType.LOOK, "examine")
                     .putAll(BasicTextTokenType.GET, "take");
+
             for(Items item : Items.values()) {
                 dictionary.putAll(BasicTextTokenType.ITEM, item.getName());
             }
@@ -106,6 +138,8 @@ public class GameData {
         setItems(new ArrayList<Item>());
         setFurnishings(new ArrayList<Furniture>());
         setLocations(new ArrayList<DynLocation>());
+        setAssociated(new ArrayList<String>());
+        setExits(MapUtil.newHashMap());
 
         player = new Player.Builder().name("player1").maxHealth(50).health(50).defense(8).attack(5).build();
         start = Rooms.build(new DynLocation("", ""), Rooms.START);

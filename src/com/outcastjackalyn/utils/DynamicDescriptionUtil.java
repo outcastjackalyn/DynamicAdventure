@@ -131,9 +131,6 @@ public final class DynamicDescriptionUtil {
     }
 
 
-
-
-
     /**
      * Returns comma separated String of element view descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
      * @param elements

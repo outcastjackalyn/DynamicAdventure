@@ -77,7 +77,7 @@ public class Main {
 
 
         game = new DynamicTextGame(gameData);
-        game.setTextParser(game.gameData.getParser());
+        game.setTextParser(game.gameData.setParser());
 
 
         game.setOutput(new PrintStream(new OutputStream() {
