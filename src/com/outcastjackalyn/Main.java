@@ -18,6 +18,15 @@ import java.io.*;
 
 public class Main {
 
+    /*
+    * The primary classes that I have created for this project are: Main, RoomManager, GameData
+    * All classes with Dyn, IDyn, Dynamic at the beginning and LockableExit are the classes that include code from the library,
+    * that I copied into this project, so i wasn't editing the library files to achieve functionality i wanted
+    * (I will attempt to comment about every instance of my changes in these files)
+    * All other classes are completely my work, I hope this helps clear up what work i have provided
+    */
+
+
 
     public static DynamicTextGame game;
     public static GameData gameData;

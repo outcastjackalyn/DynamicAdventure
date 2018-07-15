@@ -103,7 +103,8 @@ public enum Exits {
         ArrayList<Exits> exits = new ArrayList<Exits>();
         for(Exits e : Exits.values()) {
             int weight = e.getWeight();
-            // increase chance of certain exit types spawning when an associated item is already available and on the map for the player.
+            // increase chance of certain exit types spawning when an associated item
+            // is already available and on the map for the player.
             if(!gameData.getAssociated().isEmpty()) {
                 for (String s : gameData.getAssociated()) {
                     if (s.equals(e.getName())) {
@@ -120,7 +121,8 @@ public enum Exits {
             }
         }
         Exits out = exits.get(new Random().nextInt(total));
-        if(!gameData.getAssociated().isEmpty()) {//when the associated door is selected it should no longer gained increased chance of appearing
+        if(!gameData.getAssociated().isEmpty()) {
+            //when the associated door is selected it should no longer gained increased chance of appearing
             for (String s : gameData.getAssociated()) {
                 if (s.equals(out.getName())) {
                     gameData.removeAssociated(s);

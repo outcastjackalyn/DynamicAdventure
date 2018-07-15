@@ -41,7 +41,6 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
     public void setUp() {
         output.println(START_UP);
         output.println(worldUtil.getCurrent().showRoom());
-        // TODO Auto-generated method stub
     }
 
     protected String inString = "";
@@ -91,7 +90,8 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
     }
 
     /*
-     * Below this point is not my work, taken from jjcard.text.game.impl.BasicTextGame
+     * All functions are labelled with a comment to show what i have
+     * added on the library's BasicTextGame
      */
 
 
@@ -130,7 +130,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
     }
 
     @Override
-    protected void executeCommands(ITextTokenStream<BasicTextTokenType> stream) {
+    protected void executeCommands(ITextTokenStream<BasicTextTokenType> stream) { //added lock() and unlock()
         TextToken<BasicTextTokenType> object = stream.getFirstObject();
         String token = object == null ? null : object.getStandardToken();
         if (token != null) {
@@ -233,7 +233,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
     }
 
     protected void getItemFromRoom(String token, TextToken<BasicTextTokenType> object) {
-        ReturnStatus re = worldUtil.getItemFromRoom(token);
+        ReturnStatus re = worldUtil.getItemFromRoom(token); // will check furniture in the room too
 
         if (ReturnStatus.SUCCESS.equals(re)){
             output.println(token + " was added to your inventory");
@@ -265,7 +265,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
     }
 
-    protected void info(String token, TextToken<BasicTextTokenType> object) {
+    protected void info(String token, TextToken<BasicTextTokenType> object) { //I have added the dictionary display in case:HEALTH
         switch (object.getType()){
             case INVENTORY:
                 if (player.getInventory().isEmpty()) {
@@ -278,12 +278,15 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
                 output.println(player.getMoney());
                 break;
             case HEALTH:// this is used to for displaying the entire dictionary of the game
-                String out = "";
+                String out = "Here are all words in the system's current syntax: ";
                 Set<String> words = gameData.getDictionary();
                 for(String s : words) {
-                    out = out.concat(s).concat(", ");
+                    if(!s.equals("")) {
+                        out = out.concat(s).concat(", ");
+                    }
                 }
-
+                out = out.substring(0, out.length() - 2);
+                out = out.concat(".");
                 output.println(out);
                 break;
             case MAX_HEALTH:
@@ -295,7 +298,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
     }
 
-    protected void lock(String token, TextToken<BasicTextTokenType> object) {
+    protected void lock(String token, TextToken<BasicTextTokenType> object) { // i created
         if(object.getType() == BasicTextTokenType.DIRECTION) {
             if (worldUtil.lockExit(token)){
                 output.println("Locked!");
@@ -312,7 +315,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
         }
     }
 
-    protected void unlock(String token, TextToken<BasicTextTokenType> object) {
+    protected void unlock(String token, TextToken<BasicTextTokenType> object) { //i created
         if(object.getType() == BasicTextTokenType.DIRECTION) {
             if (worldUtil.unlockExit(token)) {
                 output.println("Opened!");
@@ -347,7 +350,7 @@ public class DynamicTextGame extends TextGame<BasicTextTokenType, Player>{
 
     }
 
-    protected void lootAll(String token, TextToken<BasicTextTokenType> object) {
+    protected void lootAll(String token, TextToken<BasicTextTokenType> object) { //added the functionality for furniture
         if(object.getType() == BasicTextTokenType.ENEMY) {
             ReturnStatus re = worldUtil.lootAllMob(token);
             if (ReturnStatus.SUCCESS.equals(re)) {

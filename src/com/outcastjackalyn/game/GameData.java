@@ -93,8 +93,18 @@ public class GameData {
     public ITextParser<BasicTextTokenType> setParser(){
         if (parser == null) {
             parser = new BasicTextParser<>();
-            TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values())
-                    .putAll(BasicTextTokenType.DIRECTION, LockableExit.DEFAULT_VALUES)
+            TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values());
+                    dictionary.clear();
+                    dictionary
+                            .putAll(BasicTextTokenType.PLAYER, "player", "self", "me")
+                            .putAll(BasicTextTokenType.INVENTORY, "inventory")
+                            .putAll(BasicTextTokenType.ROOM, "room", "here")
+                            .putAll(BasicTextTokenType.LOOK, "look", "examine")
+                            .putAll(BasicTextTokenType.GET, "get", "take")
+                            .putAll(BasicTextTokenType.MOVE, "move", "go")
+                            .putAll(BasicTextTokenType.LOOT, "loot")
+                            .putAll(BasicTextTokenType.DROP, "drop", "put")
+                            .putAll(BasicTextTokenType.DIRECTION, LockableExit.DEFAULT_VALUES)
                     //I have re-purposed a number of BasicTextTokenTypes that i don't intend to use for the time-being
                     // without needing to change or duplicate the file from the library
                     // EQUIP - is used in place of LOCK
@@ -102,9 +112,7 @@ public class GameData {
                     // UNEQUIP - is used in place of UNLOCK
                     .putAll(BasicTextTokenType.UNEQUIP, "unlock", "open")
                     //HEALTH - is used in place CHEAT (i.e. display all words in the dictionary.
-                    .putAll(BasicTextTokenType.HEALTH, "cheat")
-                    .putAll(BasicTextTokenType.LOOK, "examine")
-                    .putAll(BasicTextTokenType.GET, "take");
+                    .putAll(BasicTextTokenType.HEALTH, "cheat");
 
             for(Items item : Items.values()) {
                 dictionary.putAll(BasicTextTokenType.ITEM, item.getName());
@@ -117,13 +125,15 @@ public class GameData {
                 // WORDS - is used to indicate FURNITURE and hidden EXITS
                 dictionary.putAll(BasicTextTokenType.WORDS, exit.getHiddenName());
             }
-            for(NPCs npc : NPCs.values()) {
+
+            // NPCs are currently not in the game so i'm commentating them out of the dictionary
+            /*for(NPCs npc : NPCs.values()) {
                 if(npc.isHostile()) {
                     dictionary.putAll(BasicTextTokenType.ENEMY, npc.getName());
                 } else {
                     dictionary.putAll(BasicTextTokenType.NPC, npc.getName());
                 }
-            }
+            }*/
 
             parser.setTextDictionary(dictionary);
         }
