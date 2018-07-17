@@ -7,7 +7,7 @@ public enum Items {
     CROWBAR("crowbar", "It's rusty, but sturdy.", "You see a crowbar #pos#", true, Exits.BLOCKED),
     VASE("vase", "A #color# vase.", "A #adj#, empty vase #pos#", false),
     PAPER("paper", "You find the letters :#code# scrawled on the page.", "A dusty scrap of paper #pos#", true, Exits.CODELOCK),
-    KEY("key", "A #adj# #color# key.", "Something shiny can be seen #pos#", true, Exits.LOCKED);
+    KEY("key", "A #adj# #color# key.", "Something shiny, perhaps a key, can be seen #pos#", true, Exits.LOCKED);
 
 
     private String name;

@@ -17,3 +17,6 @@ most nouns of things you see will be interact-able with:
 they are all shown in the output of 'look room' if you get lost
 generic nouns include: room/here, player/self/me, inventory
 
+
+Project was written in Java using JDK9.0.1 with IntelliJ
+
